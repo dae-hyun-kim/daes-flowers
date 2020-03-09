@@ -34,6 +34,28 @@ app.get('/api/products', (req, res, next) => {
     }).catch(err => next(err));
 });
 
+app.get('/api/products/:productId', (req, res, next) => {
+  const productId = req.params.productId;
+  const sql = `
+  SELECT *
+  FROM "products"
+  WHERE "productId" = $1
+  `;
+  if (productId < 0) {
+    next(new ClientError(`${productId} is not a valid Product ID`, 400));
+  } else {
+    db.query(sql, [productId])
+      .then(result => {
+        const productDetails = result.rows[0];
+        if (!productDetails) {
+          next(new ClientError(`Cannot ${req.method} Product with ID: ${productId}`, 404));
+        } else {
+          res.status(200).json(productDetails);
+        }
+      }).catch(err => next(err));
+  }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
