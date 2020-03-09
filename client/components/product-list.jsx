@@ -29,7 +29,7 @@ export default class ProductList extends React.Component {
   createProduct() {
     const productList = this.state.products;
     const allProducts = productList.map((product, index) => {
-      return (<ProductListItems props={product} key={index}/>);
+      return (<ProductListItems product={product} key={index}/>);
     });
     return allProducts;
   }

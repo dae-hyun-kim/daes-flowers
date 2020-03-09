@@ -1,15 +1,9 @@
 import React from 'react';
 
 export default class ProductListItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-  }
 
   render() {
-    const product = this.props.props;
+    const product = this.props.product;
     return (
       <div className="card card-dimensions">
         <img src={product.image} className="card-img-top img-styling"alt="..."/>
