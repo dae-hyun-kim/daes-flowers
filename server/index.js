@@ -19,9 +19,13 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('server/index.js', (req, res, next) => {
+app.get('/api/products', (req, res, next) => {
   const sql = `
-  SELECT *
+  SELECT "productId",
+          "name",
+          "price",
+          "image",
+          "shortDescription"
   FROM "products"
   `;
   db.query(sql)
