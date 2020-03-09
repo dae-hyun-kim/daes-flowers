@@ -14,13 +14,20 @@ app.use(sessionMiddleware);
 app.use(express.json());
 
 app.get('/api/health-check', (req, res, next) => {
+  db.query('select \'successfully connected\' as "message"')
+    .then(result => res.json(result.rows[0]))
+    .catch(err => next(err));
+});
+
+app.get('server/index.js', (req, res, next) => {
   const sql = `
   SELECT *
   FROM "products"
   `;
   db.query(sql)
-    .then(result => res.json(result.rows))
-    .catch(err => next(err));
+    .then(result => {
+      res.json(result.rows);
+    }).catch(err => next(err));
 });
 
 app.use('/api', (req, res, next) => {
