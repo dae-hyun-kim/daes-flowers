@@ -1,0 +1,11 @@
+.card-dimensions {
+  width: 25%;
+  height: 45vh;
+  margin: 2%
+}
+
+.img-styling {
+  object-fit: contain;
+  height: 50%;
+  padding: 10px;
+}
