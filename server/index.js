@@ -119,6 +119,23 @@ app.post('/api/cart', (req, res, next) => {
         );
       })
       .then(result => {
+        const cartItemId = result;
+        const cartItemInformationSQL = `
+        SELECT "cartItems"."cartItemId",
+                "cartItems"."price",
+                "products"."productId",
+                "products"."image",
+                "products"."name",
+                "products"."shortDescription"
+        FROM "cartItems"
+        JOIN "products" USING ("productId")
+        WHERE "cartItems"."cartItemId" = $1
+        `;
+        db.query(cartItemInformationSQL, [cartItemId])
+          .then(result => {
+            const cartItemInformation = result.rows[0];
+            res.status(201).json(cartItemInformation);
+          });
       })
       .catch(err => next(err));
   }
