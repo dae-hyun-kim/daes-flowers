@@ -17,9 +17,17 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 ALTER TABLE ONLY public.products DROP CONSTRAINT products_pkey;
+ALTER TABLE ONLY public.carts DROP CONSTRAINT carts_pkey;
+ALTER TABLE ONLY public."cartItems" DROP CONSTRAINT "cartItems_pkey";
 ALTER TABLE public.products ALTER COLUMN "productId" DROP DEFAULT;
+ALTER TABLE public.carts ALTER COLUMN "cartId" DROP DEFAULT;
+ALTER TABLE public."cartItems" ALTER COLUMN "cartItemId" DROP DEFAULT;
 DROP SEQUENCE public."products_productId_seq";
 DROP TABLE public.products;
+DROP SEQUENCE public."carts_cartId_seq";
+DROP TABLE public.carts;
+DROP SEQUENCE public."cartItems_cartItemId_seq";
+DROP TABLE public."cartItems";
 DROP EXTENSION plpgsql;
 DROP SCHEMA public;
 --
@@ -53,6 +61,68 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+--
+-- Name: cartItems; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public."cartItems" (
+    "cartItemId" integer NOT NULL,
+    "cartId" integer NOT NULL,
+    "productId" integer NOT NULL,
+    price integer NOT NULL
+);
+
+
+--
+-- Name: cartItems_cartItemId_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public."cartItems_cartItemId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cartItems_cartItemId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public."cartItems_cartItemId_seq" OWNED BY public."cartItems"."cartItemId";
+
+
+--
+-- Name: carts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.carts (
+    "cartId" integer NOT NULL,
+    "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- Name: carts_cartId_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public."carts_cartId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: carts_cartId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public."carts_cartId_seq" OWNED BY public.carts."cartId";
+
 
 --
 -- Name: products; Type: TABLE; Schema: public; Owner: -
@@ -89,10 +159,86 @@ ALTER SEQUENCE public."products_productId_seq" OWNED BY public.products."product
 
 
 --
+-- Name: cartItems cartItemId; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."cartItems" ALTER COLUMN "cartItemId" SET DEFAULT nextval('public."cartItems_cartItemId_seq"'::regclass);
+
+
+--
+-- Name: carts cartId; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.carts ALTER COLUMN "cartId" SET DEFAULT nextval('public."carts_cartId_seq"'::regclass);
+
+
+--
 -- Name: products productId; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.products ALTER COLUMN "productId" SET DEFAULT nextval('public."products_productId_seq"'::regclass);
+
+
+--
+-- Data for Name: cartItems; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
+1	16	2	2595
+2	17	2	2595
+3	18	2	2595
+4	19	2	2595
+5	20	2	2595
+6	21	1	2999
+7	21	1	2999
+8	21	1	2999
+9	21	1	2999
+10	21	1	2999
+11	22	1	2999
+12	23	1	2999
+13	24	1	2999
+14	25	1	2999
+15	25	1	2999
+16	25	1	2999
+17	25	5	9900
+18	25	1	2999
+19	25	1	2999
+20	25	5	9900
+21	25	6	830
+\.
+
+
+--
+-- Data for Name: carts; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.carts ("cartId", "createdAt") FROM stdin;
+1	2020-03-10 16:44:15.09937+00
+2	2020-03-10 16:45:53.333924+00
+3	2020-03-10 16:46:25.047677+00
+4	2020-03-10 16:46:58.012535+00
+5	2020-03-10 16:48:31.188478+00
+6	2020-03-10 16:49:46.316366+00
+7	2020-03-10 16:50:21.478152+00
+8	2020-03-10 16:50:34.207128+00
+9	2020-03-10 19:36:53.087306+00
+10	2020-03-10 19:37:07.680316+00
+11	2020-03-10 19:37:49.412237+00
+12	2020-03-10 19:39:06.095654+00
+13	2020-03-10 19:44:32.388234+00
+14	2020-03-10 19:48:07.773523+00
+15	2020-03-10 19:48:49.842943+00
+16	2020-03-10 19:52:50.524061+00
+17	2020-03-10 19:54:39.2111+00
+18	2020-03-10 20:04:20.196232+00
+19	2020-03-10 20:05:18.939264+00
+20	2020-03-10 20:08:12.416629+00
+21	2020-03-10 20:14:57.395193+00
+22	2020-03-10 20:24:37.4627+00
+23	2020-03-10 20:24:40.051359+00
+24	2020-03-10 20:24:55.503618+00
+25	2020-03-10 20:24:56.759222+00
+\.
 
 
 --
@@ -110,10 +256,40 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 
 
 --
+-- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 21, true);
+
+
+--
+-- Name: carts_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public."carts_cartId_seq"', 25, true);
+
+
+--
 -- Name: products_productId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public."products_productId_seq"', 1, false);
+
+
+--
+-- Name: cartItems cartItems_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."cartItems"
+    ADD CONSTRAINT "cartItems_pkey" PRIMARY KEY ("cartItemId");
+
+
+--
+-- Name: carts carts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.carts
+    ADD CONSTRAINT carts_pkey PRIMARY KEY ("cartId");
 
 
 --
