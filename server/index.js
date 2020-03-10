@@ -70,11 +70,17 @@ app.get('/api/cart', (req, res, next) => {
   WHERE "cartItems"."cartId" = $1
   `;
 
-  db.query(!req.session.cartId ? [] : sqlExist, [req.session.cartId])
-    .then(result => {
-      const cartContent = result.rows;
-      res.status(200).json(cartContent);
-    });
+  if (!req.session.cartId) {
+    return res.json([]);
+  } else {
+    return (
+      db.query(sqlExist, [req.session.cartId])
+        .then(result => {
+          const cartContent = result.rows;
+          res.status(200).json(cartContent);
+        })
+    );
+  }
 });
 
 app.post('/api/cart', (req, res, next) => {
@@ -149,12 +155,12 @@ app.post('/api/cart', (req, res, next) => {
         JOIN "products" USING ("productId")
         WHERE "cartItems"."cartItemId" = $1
         `;
-        db.query(cartItemInformationSQL, [cartItemId])
-          .then(result => {
-            const cartItemInformation = result.rows[0];
-            res.status(201).json(cartItemInformation);
-            return (cartItemInformation);
-          });
+        return (
+          db.query(cartItemInformationSQL, [cartItemId])
+            .then(result => {
+              const cartItemInformation = result.rows[0];
+              res.status(201).json(cartItemInformation);
+            }));
       })
       .catch(err => next(err));
   }
