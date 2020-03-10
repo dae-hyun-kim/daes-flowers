@@ -14,6 +14,7 @@ export default class App extends React.Component {
     };
     this.setView = this.setView.bind(this);
     this.productViewChoice = this.productViewChoice.bind(this);
+    this.getCartItems = this.getCartItems.bind(this);
   }
 
   setView(name, params) {
@@ -32,6 +33,10 @@ export default class App extends React.Component {
     } else if (this.state.view.name === 'details') {
       return <ProductDetails productView={this.state.view.params} productViewStyle={this.setView}/>;
     }
+  }
+
+  getCartItems() {
+
   }
 
   render() {
