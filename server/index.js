@@ -84,13 +84,13 @@ app.post('/api/cart', (req, res, next) => {
         if (!productIdCheck) {
           throw new ClientError('That is an invalid request');
         } else {
-          const insertCart = `
+          const insertCartSQL = `
               INSERT INTO "carts" ("cartId", "createdAt")
               VALUES (default, default)
               RETURNING "cartId"
             `;
           return (
-            db.query(insertCart)
+            db.query(insertCartSQL)
               .then(result => {
                 return (
                   {
@@ -103,6 +103,19 @@ app.post('/api/cart', (req, res, next) => {
         }
       })
       .then(result => {
+        const resultCartID = result.cartId;
+        req.session.cartId = resultCartID;
+        const insertCartItemsSQL = `
+          INSERT INTO "cartItems" ("cartId", "productId", "price")
+          VALUES ($1, $2, $3)
+          RETURNING "cartItemId"
+        `;
+        return (
+          db.query(insertCartItemsSQL)
+            .then(result => {
+              return (result);
+            })
+        );
       })
       .then()
       .catch(err => next(err));
