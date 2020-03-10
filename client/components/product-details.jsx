@@ -5,12 +5,11 @@ export default class ProductDetails extends React.Component {
     super(props);
     this.state = {
       product: null
-
     };
   }
 
   componentDidMount() {
-    fetch(`/api/products/${this.state.product}`)
+    fetch(`/api/products/${this.props.productView.productId}`)
       .then(response => {
         return response.json();
       }).then(result => {
