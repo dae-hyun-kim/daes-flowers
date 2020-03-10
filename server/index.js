@@ -57,11 +57,24 @@ app.get('/api/products/:productId', (req, res, next) => {
 });
 
 app.get('/api/cart', (req, res, next) => {
-  const sql = `
+  const sqlEmpty = `
   SELECT *
   FROM "carts"
   `;
-  db.query(sql)
+
+  const sqlExist = `
+  SELECT "cartItems"."cartItemId",
+          "cartItems"."price",
+          "products"."productId",
+          "products"."image",
+          "products"."name",
+          "products"."shortDescription"
+  FROM "cartItems"
+  JOIN "products" USING ("productId")
+  WHERE "cartItems"."cartId" = $1
+  `;
+
+  db.query(!req.session.cartId ? sqlEmpty : sqlExist, [req.session.cartId])
     .then(result => {
       const cartContent = result.rows;
       res.status(200).json(cartContent);
