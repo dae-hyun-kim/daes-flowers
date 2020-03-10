@@ -7,12 +7,18 @@ export default class ProductDetails extends React.Component {
       product: null
     };
     this.handleClick = this.handleClick.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   handleClick(event) {
     event.preventDefault();
     const changeProductDetailsMethod = this.props.productViewStyle;
     changeProductDetailsMethod('catalog', {});
+  }
+
+  addItemToCart(event) {
+    const addItemMethod = this.props.addToCart;
+    addItemMethod(this.state.product);
   }
 
   componentDidMount() {
@@ -42,7 +48,7 @@ export default class ProductDetails extends React.Component {
               <h2>{this.state.product.name}</h2>
               <h3>{`$${priceReformat}`}</h3>
               <p>{this.state.product.shortDescription}</p>
-              <button className="btn btn-success">Add To Cart</button>
+              <button onClick={this.addItemToCart} className="btn btn-success">Add To Cart</button>
             </div>
           </div>
           <div>

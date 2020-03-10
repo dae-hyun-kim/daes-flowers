@@ -32,7 +32,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'catalog') {
       return <ProductList productViewStyle={this.setView} />;
     } else if (this.state.view.name === 'details') {
-      return <ProductDetails productView={this.state.view.params} productViewStyle={this.setView}/>;
+      return <ProductDetails productView={this.state.view.params} productViewStyle={this.setView} addToCart={this.addToCart}/>;
     }
   }
 
@@ -48,6 +48,7 @@ export default class App extends React.Component {
   }
 
   addToCart(product) {
+    event.preventDefault();
     fetch('/api/cart', {
       method: 'POST',
       headers: {
