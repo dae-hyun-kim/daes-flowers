@@ -69,8 +69,20 @@ app.get('/api/cart', (req, res, next) => {
 });
 
 app.post('/api/cart', (req, res, next) => {
-  if (parseInt(req.body.productId) < 0 || !req.body.productId) {
-    next(new ClientError(`${req.body.productId} is not a Valid Product ID`));
+  const productId = req.body.productId;
+  const sql = `
+  SELECT "price"
+  FROM "products"
+  WHERE "productId" = $1
+  `;
+  if (parseInt(productId) < 0 || !productId) {
+    next(new ClientError(`${productId} is not a Valid Product ID`));
+  } else {
+    db.query(sql, [productId])
+      .then()
+      .then()
+      .then()
+      .catch();
   }
 });
 
