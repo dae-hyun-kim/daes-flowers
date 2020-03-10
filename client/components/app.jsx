@@ -13,6 +13,7 @@ export default class App extends React.Component {
       }
     };
     this.setView = this.setView.bind(this);
+    this.productViewChoice = this.productViewChoice.bind(this);
   }
 
   setView(name, params) {
@@ -24,8 +25,12 @@ export default class App extends React.Component {
     });
   }
 
-  componentDidMount() {
-
+  productViewChoice() {
+    if (this.state.view.name === 'catalog') {
+      return <ProductList productViewStyle={this.setView} />;
+    } else if (this.state.view.name === 'details') {
+      return <ProductDetails />;
+    }
   }
 
   render() {
@@ -36,8 +41,7 @@ export default class App extends React.Component {
         </div>
         <div>
           <div>
-            <ProductList productViewStyle={this.setView} />
-            <ProductDetails />
+            {this.productViewChoice()}
           </div>
         </div>
       </div>
