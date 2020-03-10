@@ -76,13 +76,36 @@ app.post('/api/cart', (req, res, next) => {
   WHERE "productId" = $1
   `;
   if (parseInt(productId) < 0 || !productId) {
-    next(new ClientError(`${productId} is not a Valid Product ID`));
+    next(new ClientError(`${productId} is not a Valid Product ID`, 400));
   } else {
     db.query(sql, [productId])
+      .then(result => {
+        const productIdCheck = result.rows;
+        if (!productIdCheck) {
+          throw new ClientError('That is an invalid request');
+        } else {
+          const insertCart = `
+              INSERT INTO "carts" ("cartId", "createdAt")
+              VALUES (default, default)
+              RETURNING "cartId"
+            `;
+          return (
+            db.query(insertCart)
+              .then(result => {
+                return (
+                  {
+                    cartId: result.rows[0].cartId,
+                    price: productIdCheck[0].price
+                  }
+                );
+              })
+          );
+        }
+      })
+      .then(result => {
+      })
       .then()
-      .then()
-      .then()
-      .catch();
+      .catch(err => next(err));
   }
 });
 
