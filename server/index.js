@@ -68,6 +68,12 @@ app.get('/api/cart', (req, res, next) => {
     });
 });
 
+app.post('/api/cart', (req, res, next) => {
+  if (parseInt(req.body.productId) < 0 || !req.body.productId) {
+    next(new ClientError(`${req.body.productId} is not a Valid Product ID`));
+  }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
