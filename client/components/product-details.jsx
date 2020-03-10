@@ -6,6 +6,13 @@ export default class ProductDetails extends React.Component {
     this.state = {
       product: null
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+    const changeProductDetailsMethod = this.props.productViewStyle;
+    changeProductDetailsMethod('catalog', {});
   }
 
   componentDidMount() {
@@ -25,7 +32,7 @@ export default class ProductDetails extends React.Component {
       return (
         <div className="col-12 product-details">
           <div className="product-details-head d-flex align-items-center">
-            <button>Back to Catalog</button>
+            <div onClick={this.handleClick}>Back To Catalog</div>
           </div>
           <div className="d-flex justify-content-around">
             <div className="col-5">
