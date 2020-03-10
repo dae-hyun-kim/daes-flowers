@@ -21,7 +21,8 @@ export default class App extends React.Component {
       view: {
         name: name,
         params: params
-      }
+      },
+      cart: []
     });
   }
 
