@@ -42,6 +42,7 @@ export default class ProductDetails extends React.Component {
               <h2>{this.state.product.name}</h2>
               <h3>{`$${priceReformat}`}</h3>
               <p>{this.state.product.shortDescription}</p>
+              <button className="btn btn-success">Add To Cart</button>
             </div>
           </div>
           <div>
