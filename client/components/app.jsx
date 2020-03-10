@@ -36,14 +36,25 @@ export default class App extends React.Component {
   }
 
   getCartItems() {
+    fetch('/api/cart')
+      .then(response => {
+        return response.json();
+      }).then(result => {
+        this.setState({
+          cart: result
+        });
+      });
+  }
 
+  componentDidMount() {
+    this.getCartItems();
   }
 
   render() {
     return (
       <div className="container">
         <div>
-          <Header/>
+          <Header cartItemCount={this.state.cart ? this.state.cart.length : 0}/>
         </div>
         <div>
           <div>
