@@ -8,13 +8,14 @@ export default class CartSummary extends React.Component {
 
     };
     this.createCartItems = this.createCartItems.bind(this);
+    this.priceTotal = this.priceTotal.bind(this);
   }
 
   createCartItems() {
     const cartItemList = this.props.cartItemList;
     if (!cartItemList) {
       return (
-        <div>NOT ITEMS IN CART</div>
+        <div>NO ITEMS IN CART</div>
       );
     } else {
       const allCartItems = cartItemList.map((cartItem, index) => {
@@ -23,6 +24,18 @@ export default class CartSummary extends React.Component {
         );
       });
       return allCartItems;
+    }
+  }
+
+  priceTotal() {
+    if (this.props.cartItemList) {
+      const totalPrice = this.props.cartItemList.reduce((prev, cur) => {
+        return prev + cur.price;
+      }, 0);
+      const priceTotalReformat = (totalPrice / 100).toFixed(2);
+      return priceTotalReformat;
+    } else {
+      return 0;
     }
   }
 
@@ -38,7 +51,7 @@ export default class CartSummary extends React.Component {
         </div>
         <div className="col-10">
           <div>
-            <h2>Item Total:</h2>
+            <h2>{`Item Total: $${this.priceTotal()}`}</h2>
           </div>
         </div>
       </div>
