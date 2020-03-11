@@ -10,13 +10,15 @@ export default class CartSummary extends React.Component {
     this.createCartItems = this.createCartItems.bind(this);
     this.priceTotal = this.priceTotal.bind(this);
     this.changeView = this.changeView.bind(this);
+    this.toCheckOut = this.toCheckOut.bind(this);
+    this.hideCheckoutButton = this.hideCheckoutButton.bind(this);
   }
 
   createCartItems() {
     const cartItemList = this.props.cartItemList;
-    if (!cartItemList) {
+    if (cartItemList.length === 0) {
       return (
-        <div>NO ITEMS IN CART</div>
+        <h1>NO ITEMS IN CART</h1>
       );
     } else {
       const allCartItems = cartItemList.map((cartItem, index) => {
@@ -45,6 +47,20 @@ export default class CartSummary extends React.Component {
     changeViewMethod('catalog', {});
   }
 
+  toCheckOut() {
+    const changeViewMethod = this.props.setView;
+    changeViewMethod('checkout', {});
+  }
+
+  hideCheckoutButton() {
+    const cartItemList = this.props.cartItemList;
+    if (cartItemList.length === 0) {
+      return '';
+    } else {
+      return (<button onClick={this.toCheckOut} className="btn btn-success">Checkout</button>);
+    }
+  }
+
   render() {
     return (
       <div className="d-flex flex-wrap justify-content-center">
@@ -56,8 +72,9 @@ export default class CartSummary extends React.Component {
           {this.createCartItems()}
         </div>
         <div className="col-10">
-          <div>
+          <div className="d-flex justify-content-around">
             <h2>{`Item Total: $${this.priceTotal()}`}</h2>
+            {this.hideCheckoutButton()}
           </div>
         </div>
       </div>

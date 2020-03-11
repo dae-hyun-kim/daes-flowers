@@ -48,3 +48,21 @@
   border: 2px solid grey;
   margin: 20px
 }
+
+.checkout-container{
+  height: 70vh;
+}
+
+.checkout-content {
+  width: 60%;
+  height: 90%;
+}
+
+.checkout {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.checkout-inputs{
+  width: 70%;
+}
