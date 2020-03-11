@@ -18,6 +18,7 @@ export default class App extends React.Component {
     this.productViewChoice = this.productViewChoice.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   setView(name, params) {
@@ -64,6 +65,26 @@ export default class App extends React.Component {
       const addItemToCart = this.state.cart.concat(result);
       this.setState({
         cart: addItemToCart
+      });
+    });
+  }
+
+  placeOrder(customerInfo) {
+    fetch('/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application.json'
+      },
+      body: JSON.stringify(customerInfo)
+    }).then(response => {
+      return (response.json());
+    }).then(result => {
+      this.setState({
+        cart: [],
+        view: {
+          name: 'catalog',
+          params: {}
+        }
       });
     });
   }
