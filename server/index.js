@@ -179,6 +179,20 @@ app.post('/api/orders', (req, res, next) => {
     next(new ClientError('Please Enter A Valid Credit Card'), 400);
   } else if (!customerAddress) {
     next(new ClientError('Please enter A Valid Address'), 400);
+  } else {
+    const customerInfoSQL = `
+    INSERT INTO "orders" ("cartId", "name", "creditCard", "shippingAddress")
+    VALUES ($1, $2, $3, $4)
+    RETURNING "orderId", "createdAt", "name", "creditCard", "shippingAddress"
+    `;
+    db.query(customerInfoSQL, [customerCartId, customerName, customerCreditCard, customerAddress])
+      .then(result => {
+        const customerInfo = result.rows[0];
+        delete req.session.cartId;
+        return (
+          res.status(201).json(customerInfo)
+        );
+      }).catch(err => next(err));
   }
 });
 
