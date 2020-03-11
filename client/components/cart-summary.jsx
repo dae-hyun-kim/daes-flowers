@@ -9,6 +9,7 @@ export default class CartSummary extends React.Component {
     };
     this.createCartItems = this.createCartItems.bind(this);
     this.priceTotal = this.priceTotal.bind(this);
+    this.changeView = this.changeView.bind(this);
   }
 
   createCartItems() {
@@ -39,11 +40,16 @@ export default class CartSummary extends React.Component {
     }
   }
 
+  changeView() {
+    const changeViewMethod = this.props.setView;
+    changeViewMethod('catalog', {});
+  }
+
   render() {
     return (
       <div className="d-flex flex-wrap justify-content-center">
         <div className="col-10">
-          <div>Back To Catalog</div>
+          <div onClick={this.changeView}>Back To Catalog</div>
           <h2>My Cart</h2>
         </div>
         <div className="d-flex justify-content-center flex-wrap">
