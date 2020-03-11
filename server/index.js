@@ -166,6 +166,22 @@ app.post('/api/cart', (req, res, next) => {
   }
 });
 
+app.post('/api/orders', (req, res, next) => {
+  const customerCartId = req.session.cartId;
+  const customerName = req.body.name;
+  const customerCreditCard = req.body.creditCard;
+  const customerAddress = req.body.shippingAddress;
+  if (!customerCartId) {
+    next(new ClientError('Cart ID is Invalid', 400));
+  } else if (!customerName) {
+    next(new ClientError('Please Enter A Name.', 400));
+  } else if (!customerCreditCard) {
+    next(new ClientError('Please Enter A Valid Credit Card'), 400);
+  } else if (!customerAddress) {
+    next(new ClientError('Please enter A Valid Address'), 400);
+  }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
