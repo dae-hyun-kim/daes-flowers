@@ -185,14 +185,16 @@ app.post('/api/orders', (req, res, next) => {
     VALUES ($1, $2, $3, $4)
     RETURNING "orderId", "createdAt", "name", "creditCard", "shippingAddress"
     `;
-    db.query(customerInfoSQL, [customerCartId, customerName, customerCreditCard, customerAddress])
-      .then(result => {
-        const customerInfo = result.rows[0];
-        delete req.session.cartId;
-        return (
-          res.status(201).json(customerInfo)
-        );
-      }).catch(err => next(err));
+    return (
+      db.query(customerInfoSQL, [customerCartId, customerName, customerCreditCard, customerAddress])
+        .then(result => {
+          const customerInfo = result.rows[0];
+          delete req.session.cartId;
+          return (
+            res.status(201).json(customerInfo)
+          );
+        }).catch(err => next(err))
+    );
   }
 });
 
