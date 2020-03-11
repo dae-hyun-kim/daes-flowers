@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
+import CartSummary from './cart-summary';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -74,6 +75,9 @@ export default class App extends React.Component {
       <div className="container">
         <div>
           <Header cartItemCount={this.state.cart ? this.state.cart.length : 0}/>
+        </div>
+        <div>
+          <CartSummary cartItemList={this.state.cart}/>
         </div>
         <div>
           <div>
