@@ -166,6 +166,36 @@ app.post('/api/cart', (req, res, next) => {
   }
 });
 
+app.post('/api/orders', (req, res, next) => {
+  const customerCartId = req.session.cartId;
+  const customerName = req.body.name;
+  const customerCreditCard = req.body.creditCard;
+  const customerAddress = req.body.shippingAddress;
+  if (!customerCartId) {
+    next(new ClientError('Cart ID is Invalid', 400));
+  } else if (!customerName) {
+    next(new ClientError('Please Enter A Name.', 400));
+  } else if (!customerCreditCard) {
+    next(new ClientError('Please Enter A Valid Credit Card'), 400);
+  } else if (!customerAddress) {
+    next(new ClientError('Please enter A Valid Address'), 400);
+  } else {
+    const customerInfoSQL = `
+    INSERT INTO "orders" ("cartId", "name", "creditCard", "shippingAddress")
+    VALUES ($1, $2, $3, $4)
+    RETURNING "orderId", "createdAt", "name", "creditCard", "shippingAddress"
+    `;
+    db.query(customerInfoSQL, [customerCartId, customerName, customerCreditCard, customerAddress])
+      .then(result => {
+        const customerInfo = result.rows[0];
+        delete req.session.cartId;
+        return (
+          res.status(201).json(customerInfo)
+        );
+      }).catch(err => next(err));
+  }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
