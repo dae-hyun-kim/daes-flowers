@@ -66,3 +66,40 @@
 .checkout-inputs{
   width: 70%;
 }
+
+.logo {
+  height: 100%;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.logo-container {
+  height: 10vh;
+}
+
+
+.header-top {
+  background-color: rgb(255, 235, 253);
+  height: 10vh;
+}
+
+.header-content {
+  width: 30%
+}
+
+.website-header {
+  font-family: 'Baloo Thambi 2', cursive;
+}
+
+.nav {
+  text-align: center;
+  margin: 15px;
+}
+
+.nav:hover {
+  cursor: pointer;
+  border-bottom: 2px solid rgb(4, 89, 10);
+  color: darkgreen;
+}
