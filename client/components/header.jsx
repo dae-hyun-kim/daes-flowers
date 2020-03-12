@@ -8,11 +8,17 @@ export default class Header extends React.Component {
     };
     this.changeView = this.changeView.bind(this);
     this.priceTotal = this.priceTotal.bind(this);
+    this.changeViewToCatalog = this.changeViewToCatalog.bind(this);
   }
 
   changeView() {
     const changeViewMethod = this.props.setView;
     changeViewMethod('cart', {});
+  }
+
+  changeViewToCatalog() {
+    const changeViewMethod = this.props.setView;
+    changeViewMethod('catalog', {});
   }
 
   priceTotal() {
@@ -31,12 +37,12 @@ export default class Header extends React.Component {
     return (
       <div className="website-header d-flex justify-content-between">
         <div className="header-content d-flex justify-content-center align-items-center">
-          <div className="nav">SHOP</div>
+          <div onClick={this.changeViewToCatalog} className="nav">SHOP</div>
           <div className="nav">ABOUT US</div>
           <div className="nav">CONTACT</div>
         </div>
         <div className="header-content d-flex justify-content-center logo-container">
-          <img className="logo" src="images/logo.png" alt=""/>
+          <img onClick={this.changeViewToCatalog} className="logo" src="images/logo.png" alt=""/>
         </div>
         <div className="header-content d-flex justify-content-center align-items-center">
           <i onClick={this.changeView} className="fas fa-shopping-cart fa-2x"></i>
