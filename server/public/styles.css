@@ -67,6 +67,10 @@
   width: 70%;
 }
 
+body {
+  background-color: beige;
+}
+
 .logo {
   height: 100%;
 }
@@ -110,17 +114,42 @@
   border-bottom: 2px solid green;
 }
 .carousel-container {
-  height: 60vh;
+  height: 65vh;
 }
 
 .carousel-image-sizing {
   height: 60vh;
   width: 100%;
   object-fit: cover;
+  border: 3px dotted pink;
 }
 
-.item {
-    display: none;
-    position: relative;
-    transition(.6s ease-in-out left);
+.carousel-arrows {
+  margin: 10px;
+  opacity: 30%;
+}
+
+.carousel-arrows:hover {
+  opacity: 90%;
+}
+
+.carousel-circle-box {
+  height: 3vh;
+}
+
+.openCircle {
+  margin: 3px;
+  height: 12px;
+  width: 12px;
+  border: 2px solid green;
+  border-radius: 50%;
+}
+
+.closedCircle {
+  margin: 3px;
+  height: 12px;
+  width: 12px;
+  border: 2px solid green;
+  background-color: pink;
+  border-radius: 50%;
 }
