@@ -67,10 +67,6 @@
   width: 70%;
 }
 
-body {
-  border-top: 5px solid rgb(4, 89, 10);
-}
-
 .logo {
   height: 100%;
 }
@@ -83,12 +79,9 @@ body {
   height: 10vh;
 }
 
-.header-divider {
-  border-bottom: 3px solid rgb(4, 89, 10);
-}
 
 .header-top {
-  background-color: beige;
+  background-color: rgb(255, 235, 253);
   height: 10vh;
 }
 
@@ -96,11 +89,17 @@ body {
   width: 30%
 }
 
+.website-header {
+  font-family: 'Baloo Thambi 2', cursive;
+}
+
 .nav {
-  margin: 5px;
+  text-align: center;
+  margin: 15px;
 }
 
 .nav:hover {
   cursor: pointer;
   border-bottom: 2px solid rgb(4, 89, 10);
+  color: darkgreen;
 }

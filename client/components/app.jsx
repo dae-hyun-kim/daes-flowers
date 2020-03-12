@@ -105,8 +105,6 @@ export default class App extends React.Component {
             <Header cartItemCount={this.state.cart ? this.state.cart.length : 0} setView={this.setView} cartItemList={this.state.cart}/>
           </div>
         </div>
-        <div className="header-divider">
-        </div>
         <div className="container">
           <div>
             <div>

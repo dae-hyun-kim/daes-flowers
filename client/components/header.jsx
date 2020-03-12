@@ -29,11 +29,10 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <div className="d-flex justify-content-between">
+      <div className="website-header d-flex justify-content-between">
         <div className="header-content d-flex justify-content-center align-items-center">
           <div className="nav">SHOP</div>
           <div className="nav">ABOUT US</div>
-          <div className="nav">SERVICES</div>
           <div className="nav">CONTACT</div>
         </div>
         <div className="header-content d-flex justify-content-center logo-container">
