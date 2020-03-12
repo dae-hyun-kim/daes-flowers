@@ -5,6 +5,7 @@ import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import Carousel from './carousel';
+import SalesSection from './sales-section';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -21,6 +22,8 @@ export default class App extends React.Component {
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.carouselView = this.carouselView.bind(this);
+    this.salesSectionView = this.salesSectionView.bind(this);
   }
 
   setView(name, params) {
@@ -41,6 +44,24 @@ export default class App extends React.Component {
       return <CartSummary cartItemList={this.state.cart} setView={this.setView}/>;
     } else if (this.state.view.name === 'checkout') {
       return <CheckoutForm placeOrder={this.placeOrder} setView={this.setView} cartItemList={this.state.cart}/>;
+    }
+  }
+
+  carouselView() {
+    if (this.state.view.name === 'catalog') {
+      return (
+        <div className="carousel-container">
+          <Carousel />
+        </div>
+      );
+    }
+  }
+
+  salesSectionView() {
+    if (this.state.view.name === 'catalog') {
+      return (
+        <SalesSection/>
+      );
     }
   }
 
@@ -107,27 +128,8 @@ export default class App extends React.Component {
           </div>
         </div>
         <div className="col-12 header-divider"></div>
-        <div className="carousel-container">
-          <Carousel/>
-        </div>
-        <div className="container">
-          <div className="sales-section text-center">
-            <h2 className="sales-section-title">Create your Own Unique Bouquet</h2>
-            <div className="d-flex justify-content-center">
-              <ol>
-                <li className="sales-section-instructions">Pick your Flowers</li>
-                <li className="sales-section-instructions">Pick a Container</li>
-                <li className="sales-section-instructions">Design your Layout</li>
-                <li className="sales-section-instructions">Schedule your Delivery</li>
-                <li className="sales-section-instructions">We will take care of the rest!</li>
-              </ol>
-            </div>
-          </div>
-          <div className="col-12 short-divider"></div>
-          <div className="sales-section text-center mt-4">
-            <h2 className="sales-section-title">Our Most Popular <span className="flower-text">Flowers</span><span className="stem-text">---</span></h2>
-          </div>
-        </div>
+        {this.carouselView()}
+        {this.salesSectionView()}
         <div className="container">
           <div>
             <div>

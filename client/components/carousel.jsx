@@ -15,6 +15,7 @@ export default class Carousel extends React.Component {
       loaded: false,
       pause: false
     };
+    this.interval = null;
     this.nextImage = this.nextImage.bind(this);
     this.startInterval = this.startInterval.bind(this);
     this.generateCircles = this.generateCircles.bind(this);
@@ -49,7 +50,7 @@ export default class Carousel extends React.Component {
 
   startInterval() {
     if (this.state.loaded === false) {
-      setInterval(this.nextImage, 3000);
+      this.interval = setInterval(this.nextImage, 3000);
     }
   }
 
@@ -57,6 +58,10 @@ export default class Carousel extends React.Component {
     this.setState({
       loaded: true
     });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   generateCircles() {
