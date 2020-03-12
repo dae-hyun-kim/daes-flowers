@@ -4,6 +4,7 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
+import Carousel from './carousel';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -104,6 +105,10 @@ export default class App extends React.Component {
           <div className="col-10 mb-3">
             <Header cartItemCount={this.state.cart ? this.state.cart.length : 0} setView={this.setView} cartItemList={this.state.cart}/>
           </div>
+        </div>
+        <div className="col-12 header-divider"></div>
+        <div className="carousel-container container">
+          <Carousel/>
         </div>
         <div className="container">
           <div>
