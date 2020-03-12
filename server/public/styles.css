@@ -103,3 +103,24 @@
   border-bottom: 2px solid rgb(4, 89, 10);
   color: darkgreen;
 }
+
+.header-divider {
+  height: 1vh;
+  border-top: 2px solid green;
+  border-bottom: 2px solid green;
+}
+.carousel-container {
+  height: 60vh;
+}
+
+.carousel-image-sizing {
+  height: 60vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.item {
+    display: none;
+    position: relative;
+    transition(.6s ease-in-out left);
+}
