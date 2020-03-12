@@ -18,8 +18,6 @@ export default class Carousel extends React.Component {
     this.nextImage = this.nextImage.bind(this);
     this.startInterval = this.startInterval.bind(this);
     this.generateCircles = this.generateCircles.bind(this);
-    this.handleLeft = this.handleLeft.bind(this);
-    this.handleRight = this.handleRight.bind(this);
     this.selectImage = this.selectImage.bind(this);
   }
 
@@ -39,22 +37,6 @@ export default class Carousel extends React.Component {
         });
       }, 3000);
     }
-  }
-
-  handleLeft(event) {
-    event.preventDefault();
-    this.setState({
-      imageIndex: this.state.imageIndex - 1,
-      pause: true
-    });
-  }
-
-  handleRight(event) {
-    event.preventDefault();
-    this.setState({
-      imageIndex: this.state.imageIndex + 1,
-      pause: true
-    });
   }
 
   selectImage(event) {
@@ -91,10 +73,9 @@ export default class Carousel extends React.Component {
     return (
       <div className="text-center">
         <div className="d-flex justify-content-center align-items-center carousel-image-box">
-          <span onClick={this.handleLeft} className="fas fa-chevron-left fa-3x carousel-arrows"></span>
           <img src={carouselImages[this.state.imageIndex]} alt="" className="carousel-image-sizing"/>
-          <span onClick={this.handleRight} className="fas fa-chevron-right fa-3x carousel-arrows"></span>
         </div>
+        <div className="col-12 header-divider"></div>
         <div className="d-flex justify-content-center">
           <div className="carousel-circle-box col-2 d-flex justify-content-center">
             {this.generateCircles()}
