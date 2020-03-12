@@ -6,6 +6,7 @@ import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import Carousel from './carousel';
 import SalesSection from './sales-section';
+import AboutUs from './about-us';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -44,6 +45,8 @@ export default class App extends React.Component {
       return <CartSummary cartItemList={this.state.cart} setView={this.setView}/>;
     } else if (this.state.view.name === 'checkout') {
       return <CheckoutForm placeOrder={this.placeOrder} setView={this.setView} cartItemList={this.state.cart}/>;
+    } else if (this.state.view.name === 'aboutUs') {
+      return <AboutUs />;
     }
   }
 
