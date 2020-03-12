@@ -179,3 +179,24 @@ body {
 .stem-text {
   color: green;
 }
+
+.font-styling {
+  font-family: 'Dancing Script', cursive;
+}
+
+.about-title {
+  font-size: 3rem;
+}
+.about-us-image-sizing {
+  height: 30vh;
+  width: 100%;
+}
+
+.about-us-text {
+  font-family: 'Playfair Display', serif;
+}
+
+.social-media:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
