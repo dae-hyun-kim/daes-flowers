@@ -66,3 +66,41 @@
 .checkout-inputs{
   width: 70%;
 }
+
+body {
+  border-top: 5px solid rgb(4, 89, 10);
+}
+
+.logo {
+  height: 100%;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.logo-container {
+  height: 10vh;
+}
+
+.header-divider {
+  border-bottom: 3px solid rgb(4, 89, 10);
+}
+
+.header-top {
+  background-color: beige;
+  height: 10vh;
+}
+
+.header-content {
+  width: 30%
+}
+
+.nav {
+  margin: 5px;
+}
+
+.nav:hover {
+  cursor: pointer;
+  border-bottom: 2px solid rgb(4, 89, 10);
+}

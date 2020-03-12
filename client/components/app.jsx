@@ -99,13 +99,19 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div>
-          <Header cartItemCount={this.state.cart ? this.state.cart.length : 0} setView={this.setView}/>
+      <div className="col-12">
+        <div className="header-top d-flex justify-content-center">
+          <div className="col-10 mb-3">
+            <Header cartItemCount={this.state.cart ? this.state.cart.length : 0} setView={this.setView} cartItemList={this.state.cart}/>
+          </div>
         </div>
-        <div>
+        <div className="header-divider">
+        </div>
+        <div className="container">
           <div>
-            {this.productViewChoice()}
+            <div>
+              {this.productViewChoice()}
+            </div>
           </div>
         </div>
       </div>
