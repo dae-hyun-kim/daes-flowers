@@ -94,7 +94,7 @@ body {
 }
 
 .website-header {
-  font-family: 'Baloo Thambi 2', cursive;
+  font-family: 'Dancing Script', cursive;
 }
 
 .nav {
@@ -113,6 +113,13 @@ body {
   border-top: 2px solid green;
   border-bottom: 2px solid green;
 }
+
+.short-divider {
+  height: 1vh;
+  border-top: 3px solid green;
+  opacity: 30%;
+}
+
 .carousel-container {
   height: 65vh;
 }
@@ -121,7 +128,6 @@ body {
   height: 60vh;
   width: 100%;
   object-fit: cover;
-  border: 3px dotted pink;
 }
 
 .carousel-arrows {
@@ -152,4 +158,24 @@ body {
   border: 2px solid green;
   background-color: pink;
   border-radius: 50%;
+}
+
+.sales-section {
+  font-family: 'Dancing Script', cursive;
+}
+
+.sales-section-title {
+  font-size: 3rem;
+}
+
+.sales-section-instructions {
+  font-size: 1.5rem;
+}
+
+.flower-text {
+  color: pink;
+}
+
+.stem-text {
+  color: green;
 }
