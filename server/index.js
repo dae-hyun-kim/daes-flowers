@@ -197,6 +197,25 @@ app.post('/api/orders', (req, res, next) => {
   }
 });
 
+app.delete('/api/cart/:cartItemId', (req, res, next) => {
+  const cartItemId = req.params.cartItemId;
+  const deleteSQL = `
+  DELETE FROM "cartItems"
+  WHERE "cartItemId" = $1
+  RETURNING *
+  `;
+
+  db.query(deleteSQL, [cartItemId])
+    .then(result => {
+      if (!result.rows[0]) {
+        res.status(404).json(`Cannot find Cart Item with ID: ${cartItemId}`);
+      } else {
+        res.status(204).json(`Item with cart item ID ,${cartItemId}, has been deleted`);
+      }
+    })
+    .catch(err => next(err));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
