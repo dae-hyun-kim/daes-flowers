@@ -211,6 +211,8 @@ app.delete('/api/cart/:cartItemId', (req, res, next) => {
     .then(result => {
       if (!result.rows[0]) {
         res.status(404).json(`Cannot find Cart Item with ID: ${cartItemId}`);
+      } else if (!cartId) {
+        res.status(404).json(`Cannot find Cart with ID: ${cartId}`);
       } else {
         res.status(204).json(`Item with cart item ID ,${cartItemId}, has been deleted`);
       }
