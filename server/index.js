@@ -57,7 +57,6 @@ app.get('/api/products/:productId', (req, res, next) => {
 });
 
 app.get('/api/cart', (req, res, next) => {
-
   const sqlExist = `
   SELECT "cartItems"."cartItemId",
           "cartItems"."price",
