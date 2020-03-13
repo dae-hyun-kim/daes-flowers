@@ -199,13 +199,15 @@ app.post('/api/orders', (req, res, next) => {
 
 app.delete('/api/cart/:cartItemId', (req, res, next) => {
   const cartItemId = req.params.cartItemId;
+  const cartId = req.session.cartId;
   const deleteSQL = `
   DELETE FROM "cartItems"
   WHERE "cartItemId" = $1
+  AND "cartId" = $2
   RETURNING *
   `;
 
-  db.query(deleteSQL, [cartItemId])
+  db.query(deleteSQL, [cartItemId, cartId])
     .then(result => {
       if (!result.rows[0]) {
         res.status(404).json(`Cannot find Cart Item with ID: ${cartItemId}`);
