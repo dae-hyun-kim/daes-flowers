@@ -10,6 +10,7 @@ export default class Header extends React.Component {
     this.priceTotal = this.priceTotal.bind(this);
     this.changeViewToCatalog = this.changeViewToCatalog.bind(this);
     this.changeViewToAbout = this.changeViewToAbout.bind(this);
+    this.changeViewToContact = this.changeViewToContact.bind(this);
   }
 
   changeView() {
@@ -25,6 +26,11 @@ export default class Header extends React.Component {
   changeViewToAbout() {
     const changeViewMethod = this.props.setView;
     changeViewMethod('aboutUs', {});
+  }
+
+  changeViewToContact() {
+    const changeViewMethod = this.props.setView;
+    changeViewMethod('contactUs', {});
   }
 
   priceTotal() {
@@ -45,7 +51,7 @@ export default class Header extends React.Component {
         <div className="header-content d-flex justify-content-center align-items-center">
           <div onClick={this.changeViewToCatalog} className="nav">SHOP</div>
           <div onClick={this.changeViewToAbout} className="nav">ABOUT US</div>
-          <div className="nav">CONTACT</div>
+          <div onClick={this.changeViewToContact} className="nav">CONTACT</div>
         </div>
         <div className="header-content d-flex justify-content-center logo-container">
           <img onClick={this.changeViewToCatalog} className="logo" src="images/logo.png" alt=""/>
