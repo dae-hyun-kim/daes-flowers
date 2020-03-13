@@ -192,7 +192,7 @@ body {
   width: 100%;
 }
 
-.about-us-text {
+.about-us-text, .contact-text, .contact-us {
   font-family: 'Playfair Display', serif;
 }
 
