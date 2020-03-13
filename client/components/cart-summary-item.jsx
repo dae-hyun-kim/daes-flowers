@@ -17,10 +17,11 @@ export default class CartSummaryItem extends React.Component {
           <img src={theItem.image} alt="" className="cart-summary-img-styling"/>
         </div>
         <div className="d-flex align-items-center">
-          <div className="col-12 d-flex flex-wrap align-items-center cart-summary-text">
+          <div className="col-12">
             <h2>{theItem.name}</h2>
             <h3>{`$${priceReformat}`}</h3>
             <p>{theItem.shortDescription}</p>
+            <button className="btn btn-danger">Remove Item</button>
           </div>
         </div>
       </div>

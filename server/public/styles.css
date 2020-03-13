@@ -40,10 +40,6 @@
   padding: 10px;
 }
 
-.cart-summary-text * {
-  width: 100%;
-}
-
 .cart-item-border {
   border: 2px solid grey;
   margin: 20px
