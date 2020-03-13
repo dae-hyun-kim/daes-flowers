@@ -57,7 +57,6 @@ app.get('/api/products/:productId', (req, res, next) => {
 });
 
 app.get('/api/cart', (req, res, next) => {
-
   const sqlExist = `
   SELECT "cartItems"."cartItemId",
           "cartItems"."price",
@@ -196,6 +195,29 @@ app.post('/api/orders', (req, res, next) => {
         }).catch(err => next(err))
     );
   }
+});
+
+app.delete('/api/cart/:cartItemId', (req, res, next) => {
+  const cartItemId = req.params.cartItemId;
+  const cartId = req.session.cartId;
+  const deleteSQL = `
+  DELETE FROM "cartItems"
+  WHERE "cartItemId" = $1
+  AND "cartId" = $2
+  RETURNING *
+  `;
+
+  db.query(deleteSQL, [cartItemId, cartId])
+    .then(result => {
+      if (!result.rows[0]) {
+        res.status(404).json(`Cannot find Cart Item with ID: ${cartItemId}`);
+      } else if (!cartId) {
+        res.status(404).json(`Cannot find Cart with ID: ${cartId}`);
+      } else {
+        res.status(204).json(`Item with cart item ID ,${cartItemId}, has been deleted`);
+      }
+    })
+    .catch(err => next(err));
 });
 
 app.use('/api', (req, res, next) => {
