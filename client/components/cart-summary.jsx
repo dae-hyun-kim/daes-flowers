@@ -23,7 +23,7 @@ export default class CartSummary extends React.Component {
     } else {
       const allCartItems = cartItemList.map((cartItem, index) => {
         return (
-          <CartSummaryItem item={cartItem} key={index} />
+          <CartSummaryItem item={cartItem} key={index} removeFromCart={this.props.removeFromCart}/>
         );
       });
       return allCartItems;
