@@ -102,8 +102,7 @@ export default class App extends React.Component {
   }
 
   removeFromCart(cartItemId) {
-    event.preventDefault();
-    const findIndexFunction = currentId => currentId.id === parseInt(cartItemId);
+    const findIndexFunction = currentId => currentId.cartItemId === parseInt(cartItemId);
     const theIndex = this.state.cart.findIndex(findIndexFunction);
     fetch(`/api/cart/${cartItemId}`, {
       method: 'DELETE'
