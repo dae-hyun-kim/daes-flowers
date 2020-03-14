@@ -26,6 +26,7 @@ export default class App extends React.Component {
     this.placeOrder = this.placeOrder.bind(this);
     this.carouselView = this.carouselView.bind(this);
     this.salesSectionView = this.salesSectionView.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
   setView(name, params) {
@@ -43,7 +44,7 @@ export default class App extends React.Component {
     } else if (this.state.view.name === 'details') {
       return <ProductDetails productView={this.state.view.params} productViewStyle={this.setView} addToCart={this.addToCart}/>;
     } else if (this.state.view.name === 'cart') {
-      return <CartSummary cartItemList={this.state.cart} setView={this.setView}/>;
+      return <CartSummary cartItemList={this.state.cart} setView={this.setView} removeFromCart={this.removeFromCart}/>;
     } else if (this.state.view.name === 'checkout') {
       return <CheckoutForm placeOrder={this.placeOrder} setView={this.setView} cartItemList={this.state.cart}/>;
     } else if (this.state.view.name === 'aboutUs') {
@@ -98,6 +99,25 @@ export default class App extends React.Component {
         cart: addItemToCart
       });
     });
+  }
+
+  removeFromCart(cartItemId) {
+    event.preventDefault();
+    const findIndexFunction = currentId => currentId.id === parseInt(cartItemId);
+    const theIndex = this.state.cart.findIndex(findIndexFunction);
+    fetch(`/api/cart/${cartItemId}`, {
+      method: 'DELETE'
+    })
+      .then(response => {
+        return response;
+      })
+      .then(result => {
+        const newCart = this.state.cart.slice();
+        newCart.splice(theIndex, 1);
+        this.setState({
+          cart: newCart
+        });
+      });
   }
 
   placeOrder(customerInfo) {

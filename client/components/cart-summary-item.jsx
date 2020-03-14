@@ -6,6 +6,13 @@ export default class CartSummaryItem extends React.Component {
     this.state = {
 
     };
+    this.removeFromCart = this.removeFromCart.bind(this);
+  }
+
+  removeFromCart(event) {
+    const cartItemId = event.currentTarget.id;
+    const removeCartItemMethod = this.props.removeFromCart;
+    removeCartItemMethod(cartItemId);
   }
 
   render() {
@@ -21,7 +28,7 @@ export default class CartSummaryItem extends React.Component {
             <h2>{theItem.name}</h2>
             <h3>{`$${priceReformat}`}</h3>
             <p>{theItem.shortDescription}</p>
-            <button className="btn btn-danger">Remove Item</button>
+            <button onClick={this.removeFromCart} id={this.props.item.cartItemId} className="btn btn-danger">Remove Item</button>
           </div>
         </div>
       </div>
