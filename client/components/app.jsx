@@ -40,7 +40,17 @@ export default class App extends React.Component {
 
   productViewChoice() {
     if (this.state.view.name === 'catalog') {
-      return <ProductList productViewStyle={this.setView} />;
+      return (
+        <div>
+          <ProductList productViewStyle={this.setView} />
+          <div className="col-12 short-divider mb-3"></div>
+          <div>
+            <h2 className="text-center sales-section-title font-styling mt-3">A Completely Unique Bouquet, Designed By You!</h2>
+            <h6 className="text-center mt-3 mb-5 flower-quote">{`"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis doloribus quia velit minus
+              expedita optio alias corrupti aliquam amet vel"`}</h6>
+          </div>
+        </div>
+      );
     } else if (this.state.view.name === 'details') {
       return <ProductDetails productView={this.state.view.params} productViewStyle={this.setView} addToCart={this.addToCart}/>;
     } else if (this.state.view.name === 'cart') {

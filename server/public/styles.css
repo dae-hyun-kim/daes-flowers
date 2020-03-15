@@ -6,6 +6,12 @@
 
 .card-font {
   font-size: 0.8em;
+  font-family: 'Playfair Display', serif;
+}
+
+.card-product-name {
+  font-size: 1.5rem;
+  font-family: 'Dancing Script', cursive;
 }
 
 .img-styling {
@@ -199,4 +205,8 @@ body {
 .social-media:hover {
   transform: scale(1.1);
   cursor: pointer;
+}
+
+.flower-quote {
+  font-family: 'Playfair Display', serif;
 }
