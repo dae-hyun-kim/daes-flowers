@@ -1,7 +1,11 @@
 .card-dimensions {
-  width: 25%;
+  width: 20%;
   height: 45vh;
   margin: 2%
+}
+
+.card-font {
+  font-size: 0.8em;
 }
 
 .img-styling {
