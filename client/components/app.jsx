@@ -8,6 +8,7 @@ import Carousel from './carousel';
 import SalesSection from './sales-section';
 import AboutUs from './about-us';
 import ContactUs from './contact-us';
+import Footer from './footer';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -172,6 +173,7 @@ export default class App extends React.Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
