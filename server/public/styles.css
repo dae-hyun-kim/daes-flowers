@@ -4,8 +4,14 @@
   margin: 2%
 }
 
-.card-font {
+.card-font, .footer-info {
   font-size: 0.8em;
+  font-family: 'Playfair Display', serif;
+}
+
+.card-product-name, .footer-titles {
+  font-size: 1.5rem;
+  font-family: 'Dancing Script', cursive;
 }
 
 .img-styling {
@@ -108,7 +114,7 @@ body {
   color: darkgreen;
 }
 
-.header-divider {
+.header-divider, .footer-divider {
   height: 1vh;
   border-top: 2px solid green;
   border-bottom: 2px solid green;
@@ -199,4 +205,14 @@ body {
 .social-media:hover {
   transform: scale(1.1);
   cursor: pointer;
+}
+
+.flower-quote {
+  font-family: 'Playfair Display', serif;
+}
+
+.footer {
+  width: 100%;
+  height: 25vh;
+  background-color: rgb(255, 235, 253);
 }
