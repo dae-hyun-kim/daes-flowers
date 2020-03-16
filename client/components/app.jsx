@@ -28,6 +28,7 @@ export default class App extends React.Component {
     this.carouselView = this.carouselView.bind(this);
     this.salesSectionView = this.salesSectionView.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
+    this.footerView = this.footerView.bind(this);
   }
 
   setView(name, params) {
@@ -62,6 +63,18 @@ export default class App extends React.Component {
       return <AboutUs />;
     } else if (this.state.view.name === 'contactUs') {
       return <ContactUs/>;
+    }
+  }
+
+  footerView() {
+    if (this.state.view.name === 'catalog') {
+      return (
+        <Footer setView={this.setView}/>
+      );
+    } else {
+      return (
+        null
+      );
     }
   }
 
@@ -173,7 +186,7 @@ export default class App extends React.Component {
             </div>
           </div>
         </div>
-        <Footer />
+        {this.footerView()}
       </div>
     );
   }

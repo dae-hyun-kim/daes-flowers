@@ -1,6 +1,19 @@
 import React from 'react';
 
 export default class Footer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    };
+    this.changeToCatalog = this.changeToCatalog.bind(this);
+  }
+
+  changeToCatalog() {
+    const changeViewMethod = this.props.setView;
+    changeViewMethod('aboutUs', {});
+  }
+
   render() {
     return (
       <div>
@@ -14,7 +27,7 @@ export default class Footer extends React.Component {
           </div>
           <div className="mt-4 footer-info">
             <h5 className="footer-titles">About Us:</h5>
-            <p>Our Story</p>
+            <p onClick={this.changeToCatalog}>Our Story</p>
           </div>
           <div className="mt-4 footer-info">
             <h5 className="footer-titles">Follow Us</h5>
