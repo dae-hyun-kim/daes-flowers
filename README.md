@@ -11,6 +11,7 @@ A full-stack e-commerce website for unique and customizable flower bouquets.
   <li>Node.js</li>
   <li>Webpack</li>
   <li>PostgreSQL</li>
+</ul>
 
 # Live Demo
 Try the application at
