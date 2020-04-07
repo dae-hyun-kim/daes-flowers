@@ -282,4 +282,39 @@ and (max-device-width: 500px) {
     height: 30vh;
     text-align: center;
   }
+
+  .about-title {
+    text-align: center;
+  }
+
+  .about-us-image-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .about-us-text {
+    margin-top: 20px;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .thank-you {
+    text-align: center;
+  }
+
+  .social-media {
+    margin: 5px;
+  }
+
+  .contact-icons {
+    font-size: 5em;
+  }
+
+  .contact-containers {
+    margin-top: 15px;
+  }
+
+  .contact-end {
+    margin-bottom: 50px;
+  }
 }
