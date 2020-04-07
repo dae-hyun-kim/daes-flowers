@@ -98,8 +98,8 @@ export default class Header extends React.Component {
         <div className="header-content d-flex justify-content-center logo-container">
           <img onClick={this.changeViewToCatalog} className="logo" src="images/logo.png" alt=""/>
         </div>
-        <div className="header-content d-flex justify-content-center align-items-center">
-          <i onClick={this.changeView} className="fas fa-shopping-cart fa-2x"></i>
+        <div onClick={this.changeView} className="header-content d-flex justify-content-center align-items-center">
+          <i className="fas fa-shopping-cart fa-2x cart"></i>
           <span className="cost">{`(${this.props.cartItemCount})`}</span>
           <span className="cost">{`($${this.priceTotal()})`}</span>
         </div>
