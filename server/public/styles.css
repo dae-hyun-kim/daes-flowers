@@ -217,6 +217,10 @@ body {
   background-color: rgb(255, 235, 253);
 }
 
+.fa-bars {
+  display: none
+}
+
 @media only screen
 and (max-device-width: 500px) {
   .card-dimensions {
@@ -241,5 +245,15 @@ and (max-device-width: 500px) {
 
   .nav {
     display: none;
+  }
+
+  .fa-bars {
+    display: inline-block;
+  }
+
+  .fixed {
+    position: absolute;
+    background-color: white;
+    z-index: 1000;
   }
 }

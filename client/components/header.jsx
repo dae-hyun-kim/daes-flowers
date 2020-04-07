@@ -4,13 +4,15 @@ export default class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      navDropDown: false
     };
     this.changeView = this.changeView.bind(this);
     this.priceTotal = this.priceTotal.bind(this);
     this.changeViewToCatalog = this.changeViewToCatalog.bind(this);
     this.changeViewToAbout = this.changeViewToAbout.bind(this);
     this.changeViewToContact = this.changeViewToContact.bind(this);
+    this.showNavDropDown = this.showNavDropDown.bind(this);
+    this.showDropDown = this.showDropDown.bind(this);
   }
 
   changeView() {
@@ -45,10 +47,38 @@ export default class Header extends React.Component {
     }
   }
 
+  showNavDropDown() {
+    if (this.state.navDropDown === true) {
+      return (
+        <div className="fixed">
+          <p onClick={this.changeViewToCatalog}>SHOP</p>
+          <p onClick={this.changeViewToAbout}>ABOUT US</p>
+          <p onClick={this.changeViewToContact}>CONTACT</p>
+        </div>
+      );
+    }
+  }
+
+  showDropDown() {
+    if (this.state.navDropDown === true) {
+      this.setState({
+        navDropDown: false
+      });
+    } else {
+      this.setState({
+        navDropDown: true
+      });
+    }
+  }
+
   render() {
     return (
       <div className="website-header d-flex justify-content-between">
         <div className="header-content d-flex justify-content-center align-items-center">
+          <div>
+            <i className="fas fa-bars" onClick={this.showDropDown}></i>
+            {this.showNavDropDown()}
+          </div>
           <div onClick={this.changeViewToCatalog} className="nav">SHOP</div>
           <div onClick={this.changeViewToAbout} className="nav">ABOUT US</div>
           <div onClick={this.changeViewToContact} className="nav">CONTACT</div>
