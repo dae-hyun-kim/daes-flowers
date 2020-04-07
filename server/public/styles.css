@@ -277,4 +277,9 @@ and (max-device-width: 500px) {
     flex: 0 0 25%;
     max-width: 25%;
   }
+
+  .footer {
+    height: 30vh;
+    text-align: center;
+  }
 }
