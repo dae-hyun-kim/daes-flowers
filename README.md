@@ -14,7 +14,7 @@ A full-stack e-commerce website for unique and customizable flower bouquets.
 </ul>
 
 # Live Demo
-Try the application at
+Try the application at <a href="https://daes-flowers.danny-dae-kim.com/">https://daes-flowers.danny-dae-kim.com/</a>
 
 # Features
 <ul>
