@@ -18,21 +18,33 @@ export default class Header extends React.Component {
   changeView() {
     const changeViewMethod = this.props.setView;
     changeViewMethod('cart', {});
+    this.setState({
+      navDropDown: false
+    });
   }
 
   changeViewToCatalog() {
     const changeViewMethod = this.props.setView;
     changeViewMethod('catalog', {});
+    this.setState({
+      navDropDown: false
+    });
   }
 
   changeViewToAbout() {
     const changeViewMethod = this.props.setView;
     changeViewMethod('aboutUs', {});
+    this.setState({
+      navDropDown: false
+    });
   }
 
   changeViewToContact() {
     const changeViewMethod = this.props.setView;
     changeViewMethod('contactUs', {});
+    this.setState({
+      navDropDown: false
+    });
   }
 
   priceTotal() {
@@ -51,9 +63,9 @@ export default class Header extends React.Component {
     if (this.state.navDropDown === true) {
       return (
         <div className="fixed">
-          <p onClick={this.changeViewToCatalog}>SHOP</p>
-          <p onClick={this.changeViewToAbout}>ABOUT US</p>
-          <p onClick={this.changeViewToContact}>CONTACT</p>
+          <p onClick={this.changeViewToCatalog} className="mt-2"><span className="dropdown-text">SHOP</span></p>
+          <p onClick={this.changeViewToAbout} className="mt-2"><span className="dropdown-text">ABOUT US</span></p>
+          <p onClick={this.changeViewToContact} className="mt-2"><span className="dropdown-text">CONTACT</span></p>
         </div>
       );
     }
