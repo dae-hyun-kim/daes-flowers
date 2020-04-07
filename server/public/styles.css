@@ -216,3 +216,30 @@ body {
   height: 25vh;
   background-color: rgb(255, 235, 253);
 }
+
+@media only screen
+and (max-device-width: 500px) {
+  .card-dimensions {
+    width: 100%;
+  }
+
+  .cost {
+    display: none;
+  }
+
+  .fa-shopping-cart {
+    font-size: 1.3em;
+  }
+
+  .logo {
+    height: 80%;
+  }
+
+  .logo-container {
+    align-items: center;
+  }
+
+  .nav {
+    display: none;
+  }
+}

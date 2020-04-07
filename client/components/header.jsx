@@ -58,8 +58,8 @@ export default class Header extends React.Component {
         </div>
         <div className="header-content d-flex justify-content-center align-items-center">
           <i onClick={this.changeView} className="fas fa-shopping-cart fa-2x"></i>
-          <span>{`(${this.props.cartItemCount})`}</span>
-          <span>{`($${this.priceTotal()})`}</span>
+          <span className="cost">{`(${this.props.cartItemCount})`}</span>
+          <span className="cost">{`($${this.priceTotal()})`}</span>
         </div>
       </div>
     );
