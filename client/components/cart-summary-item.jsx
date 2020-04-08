@@ -24,11 +24,13 @@ export default class CartSummaryItem extends React.Component {
           <img src={theItem.image} alt="" className="cart-summary-img-styling"/>
         </div>
         <div className="d-flex align-items-center">
-          <div className="col-12">
-            <h2>{theItem.name}</h2>
-            <h3>{`$${priceReformat}`}</h3>
-            <p>{theItem.shortDescription}</p>
-            <button onClick={this.removeFromCart} id={this.props.item.cartItemId} className="btn btn-danger">Remove Item</button>
+          <div className="col-12 text-center">
+            <h2 className="font-styling flower-name">{theItem.name}</h2>
+            <h3 className="font-styling">{`$${priceReformat}`}</h3>
+            <p className="flower-info-text">{theItem.shortDescription}</p>
+            <div className="text-right mt-5">
+              <button onClick={this.removeFromCart} id={this.props.item.cartItemId} className="btn btn-danger btn-sm font-styling remove">Remove</button>
+            </div>
           </div>
         </div>
       </div>

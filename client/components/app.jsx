@@ -67,7 +67,7 @@ export default class App extends React.Component {
   }
 
   footerView() {
-    if (this.state.view.name === 'catalog') {
+    if (this.state.view.name === 'catalog' || this.state.view.name === 'cart' || this.state.view.name === 'details') {
       return (
         <Footer setView={this.setView}/>
       );
@@ -170,9 +170,9 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="col-12">
+      <div className="col-12 all">
         <div className="header-top d-flex justify-content-center">
-          <div className="col-10 mb-3">
+          <div className="col-12 mb-3">
             <Header cartItemCount={this.state.cart ? this.state.cart.length : 0} setView={this.setView} cartItemList={this.state.cart}/>
           </div>
         </div>

@@ -36,23 +36,27 @@ export default class ProductDetails extends React.Component {
     if (this.state.product) {
       const priceReformat = (this.state.product.price / 100).toFixed(2);
       return (
-        <div className="col-12 product-details">
-          <div className="product-details-head d-flex align-items-center">
-            <div onClick={this.handleClick}>Back To Catalog</div>
-          </div>
-          <div className="d-flex justify-content-around">
-            <div className="col-5">
-              <img src={this.state.product.image} className="product-details-image" alt=""/>
+        <div className="product-details-container">
+          <div className="col-12 product-details mt-3 mb-3">
+            <div className="product-details-head d-flex align-items-center">
+              <button className="btn btn-pink" onClick={this.handleClick}>Back To Catalog</button>
             </div>
-            <div className="col-5 product-details-info">
-              <h2>{this.state.product.name}</h2>
-              <h3>{`$${priceReformat}`}</h3>
-              <p>{this.state.product.shortDescription}</p>
-              <button onClick={this.addItemToCart} className="btn btn-success">Add To Cart</button>
+            <div className="d-flex justify-content-around flex-wrap">
+              <div className="col-5 product-detail-image-container">
+                <img src={this.state.product.image} className="product-details-image" alt="flower image"/>
+              </div>
+              <div className="col-5 product-details-info ">
+                <h2 className="font-styling flower-name">{this.state.product.name}</h2>
+                <h3 className="font-styling">{`$${priceReformat}`}</h3>
+                <p className="flower-info-text">{this.state.product.shortDescription}</p>
+                <div>
+                  <button onClick={this.addItemToCart} className="btn btn-success success">Add To Cart</button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div>
-            <p>{this.state.product.longDescription}</p>
+            <div>
+              <p className="flower-info-text mt-5">{this.state.product.longDescription}</p>
+            </div>
           </div>
         </div>
       );

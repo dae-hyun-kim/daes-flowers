@@ -57,16 +57,16 @@ export default class CartSummary extends React.Component {
     if (cartItemList.length === 0) {
       return '';
     } else {
-      return (<button onClick={this.toCheckOut} className="btn btn-success">Checkout</button>);
+      return (<button onClick={this.toCheckOut} className="btn btn-success success">Checkout</button>);
     }
   }
 
   render() {
     return (
-      <div className="d-flex flex-wrap justify-content-center">
-        <div className="col-10">
-          <div onClick={this.changeView}>Back To Catalog</div>
-          <h2>My Cart</h2>
+      <div className="d-flex flex-wrap justify-content-center cart-summary-container">
+        <div className="col-10 mt-3">
+          <button className="btn btn-pink" onClick={this.changeView}>Back To Catalog</button>
+          <h1 className="mt-4 font-styling text-center">My Cart</h1>
         </div>
         <div className="d-flex justify-content-center flex-wrap">
           {this.createCartItems()}

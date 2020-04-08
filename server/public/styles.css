@@ -22,7 +22,6 @@
 
 .product-details {
   height: 70vh;
-  border: 2px solid lightgray;
 }
 .product-details-head {
   height: 10%;
@@ -30,13 +29,14 @@
 
 .product-details-image {
   width: 100%;
-  height: 40vh;
   object-fit: contain;
   margin-top: 10px;
+  box-shadow: 0 6px 20px 0 rgba(255, 235, 253, 1);
 }
 
 .product-details-info * {
   margin-top: 5%;
+  text-align: center;
 }
 
 .cart-item-container {
@@ -110,7 +110,7 @@ body {
 
 .nav:hover {
   cursor: pointer;
-  border-bottom: 2px solid rgb(4, 89, 10);
+  border-bottom: 2px solid green;
   color: darkgreen;
 }
 
@@ -207,7 +207,7 @@ body {
   cursor: pointer;
 }
 
-.flower-quote {
+.flower-quote, .flower-info-text {
   font-family: 'Playfair Display', serif;
 }
 
@@ -215,4 +215,169 @@ body {
   width: 100%;
   height: 25vh;
   background-color: rgb(255, 235, 253);
+}
+
+.fa-bars {
+  display: none
+}
+
+.all {
+  padding: 0;
+}
+
+.dropdown-text {
+  border-bottom: 2px solid green;
+}
+
+.cart:hover {
+  cursor: pointer;
+  border-bottom: 2px solid green;
+}
+
+.card:hover {
+  cursor: pointer;
+  box-shadow: 0 6px 20px 0 rgba(255, 235, 253, 1);
+  transform: scale(1.05);
+}
+
+.our-story-text:hover {
+  cursor: pointer;
+}
+
+.cart-summary-container {
+  min-height: 70vh;
+}
+
+.btn-pink {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5em;
+  color: black;
+  background-color: rgb(255, 235, 253);
+  border: 1px solid black;
+}
+
+.btn-pink:hover {
+  background-color: rgb(247, 214, 244);
+}
+
+.success {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5em;
+  border: 1px solid black;
+}
+
+.flower-name {
+  font-size: 3em;
+}
+
+.flower-info-text {
+    text-align: center;
+  }
+
+.remove {
+  font-size: 1.2em;
+}
+
+@media only screen
+and (max-device-width: 500px) {
+  .card-dimensions {
+    width: 100%;
+  }
+
+  .cost {
+    display: none;
+  }
+
+  .fa-shopping-cart {
+    font-size: 1.3em;
+  }
+
+  .logo {
+    height: 80%;
+  }
+
+  .logo-container {
+    align-items: center;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .fa-bars {
+    display: inline-block;
+  }
+
+  .fixed {
+    position: absolute;
+    border: 2px solid green;
+    background-color: rgb(255, 235, 253);
+    z-index: 1000;
+    width: 150px;
+    text-align: center;
+    left: 0;
+  }
+
+  .header-content {
+    width: 5%;
+  }
+
+  .carousel-circle-box {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .footer {
+    height: 30vh;
+    text-align: center;
+  }
+
+  .about-title {
+    text-align: center;
+  }
+
+  .about-us-image-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .about-us-text {
+    margin-top: 20px;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .thank-you {
+    text-align: center;
+  }
+
+  .social-media {
+    margin: 5px;
+  }
+
+  .contact-icons {
+    font-size: 5em;
+  }
+
+  .contact-containers {
+    margin-top: 15px;
+  }
+
+  .contact-end {
+    margin-bottom: 50px;
+  }
+
+  .product-detail-image-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .product-details-info {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .product-details-container {
+    height: 900px;
+  }
 }

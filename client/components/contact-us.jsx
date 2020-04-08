@@ -10,20 +10,20 @@ export default class ContactUs extends React.Component {
           <p className="contact-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse,
             praesentium laborum in nemo rerum nam aperiam cum officiis quae nisi.</p>
         </div>
-        <div className="d-flex justify-content-around mt-4 contact-us">
-          <div className="text-center">
-            <i className="far fa-clock fa-9x"></i>
+        <div className="d-flex justify-content-around mt-4 contact-us flex-wrap">
+          <div className="text-center contact-containers">
+            <i className="far fa-clock fa-9x contact-icons"></i>
             <h3 className="mt-4">Store Hours:</h3>
             <h5>Monday-Friday</h5>
             <h5>7AM - 5PM</h5>
           </div>
-          <div className="text-center">
-            <i className="fas fa-phone fa-9x"></i>
+          <div className="text-center contact-containers">
+            <i className="fas fa-phone fa-9x contact-icons"></i>
             <h3 className="mt-4">Phone Number:</h3>
             <h5>123-456-7890</h5>
           </div>
-          <div className="text-center">
-            <i className="far fa-envelope fa-9x"></i>
+          <div className="text-center contact-containers contact-end">
+            <i className="far fa-envelope fa-9x contact-icons"></i>
             <h3 className="mt-4">Email:</h3>
             <h5>Thisisnotreal@gmail.com</h5>
           </div>
