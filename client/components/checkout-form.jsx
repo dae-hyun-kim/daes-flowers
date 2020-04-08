@@ -6,7 +6,8 @@ export default class CheckoutForm extends React.Component {
     this.state = {
       name: '',
       creditCard: '',
-      shippingAddress: ''
+      shippingAddress: '',
+      error: false
     };
     this.handleName = this.handleName.bind(this);
     this.handleCreditCard = this.handleCreditCard.bind(this);
@@ -14,6 +15,7 @@ export default class CheckoutForm extends React.Component {
     this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
     this.changeView = this.changeView.bind(this);
     this.priceTotal = this.priceTotal.bind(this);
+    this.displayError = this.displayError.bind(this);
   }
 
   handleName(event) {
@@ -36,19 +38,36 @@ export default class CheckoutForm extends React.Component {
 
   handlePlaceOrder(event) {
     event.preventDefault();
-    const placeOrderMethod = this.props.placeOrder;
-    const customerInfoObject = {
-      name: this.state.name,
-      creditCard: this.state.creditCard,
-      shippingAddress: this.state.shippingAddress
-    };
-    placeOrderMethod(customerInfoObject);
+    if (!this.state.name || !this.state.creditCard || !this.state.shippingAddress) {
+      this.setState({
+        error: true
+      });
+    } else {
+      const placeOrderMethod = this.props.placeOrder;
+      this.setState({
+        error: false
+      });
+      const customerInfoObject = {
+        name: this.state.name,
+        creditCard: this.state.creditCard,
+        shippingAddress: this.state.shippingAddress
+      };
+      placeOrderMethod(customerInfoObject);
+    }
   }
 
   changeView(event) {
     event.preventDefault();
     const changeViewMethod = this.props.setView;
     changeViewMethod('catalog', {});
+  }
+
+  displayError() {
+    if (this.state.error === true) {
+      return (
+        <h4 className="font-styling text-center error-message mt-3">Please fill out form to complete order.</h4>
+      );
+    }
   }
 
   priceTotal() {
@@ -70,6 +89,7 @@ export default class CheckoutForm extends React.Component {
           <div>
             <h1 className="font-styling checkout-heading mb-4">Checkout</h1>
             <h3 className="final-order-total">{`Order Total: $${this.priceTotal()}`}</h3>
+            {this.displayError()}
           </div>
           <form>
 

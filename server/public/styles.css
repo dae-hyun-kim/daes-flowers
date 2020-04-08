@@ -251,7 +251,7 @@ body {
 
 .btn-pink {
   font-family: 'Dancing Script', cursive;
-  font-size: 1.5em;
+  font-size: 1em;
   color: black;
   background-color: rgb(255, 235, 253);
   border: 1px solid black;
@@ -303,6 +303,10 @@ body {
 
 .continue-shopping-size {
   font-size: 1em;
+}
+
+.error-message {
+  color: red;
 }
 
 @media only screen
