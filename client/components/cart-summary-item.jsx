@@ -20,7 +20,7 @@ export default class CartSummaryItem extends React.Component {
     const priceReformat = (theItem.price / 100).toFixed(2);
     return (
       <div className="d-flex justify-content-around cart-item-container col-10 cart-item-border">
-        <div className="col-5">
+        <div className="col-5 cart-summary-image-container">
           <img src={theItem.image} alt="" className="cart-summary-img-styling"/>
         </div>
         <div className="d-flex align-items-center">
