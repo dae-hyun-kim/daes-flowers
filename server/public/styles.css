@@ -414,7 +414,7 @@ and (max-device-width: 500px) {
 
   .cart-item-container {
     flex-wrap: wrap;
-    height: 80vh;
+    height: 90vh;
   }
 
   .cart-summary-image-container {
@@ -429,5 +429,153 @@ and (max-device-width: 500px) {
 
   .place-order-container {
     flex-wrap: wrap;
+  }
+}
+
+@media only screen
+and (min-device-width: 501px)
+and (max-device-width: 750px) {
+  .card-dimensions {
+    width: 45%;
+    height: 100vh;
+  }
+
+  .cost {
+    display: none;
+  }
+
+  .fa-shopping-cart {
+    font-size: 1.3em;
+  }
+
+  .logo {
+    height: 50px;
+  }
+
+  .logo-container {
+    align-items: center;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .fa-bars {
+    display: inline-block;
+  }
+
+  .fixed {
+    position: absolute;
+    border: 2px solid green;
+    background-color: rgb(255, 235, 253);
+    z-index: 1000;
+    width: 150px;
+    text-align: center;
+    left: 0;
+  }
+
+  .header-content {
+    width: 15%;
+  }
+
+  .carousel-circle-box {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .footer {
+    height: 45vh;
+    text-align: center;
+  }
+
+  .about-title {
+    text-align: center;
+  }
+
+  .about-us-image-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .about-us-image-sizing {
+    height: 55vh;
+  }
+
+  .about-us-text {
+    margin-top: 20px;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .thank-you {
+    text-align: center;
+  }
+
+  .social-media {
+    margin: 5px;
+  }
+
+  .contact-icons {
+    font-size: 5em;
+  }
+
+  .contact-containers {
+    margin-top: 15px;
+  }
+
+  .contact-end {
+    margin-bottom: 50px;
+  }
+
+  .product-detail-image-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .product-details-info {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .product-details-container {
+    height: 900px;
+  }
+
+  .cart-item-container {
+    flex-wrap: wrap;
+    height: 480px;
+  }
+
+  .cart-summary-image-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .checkout-box {
+    display: block;
+    text-align: center;
+  }
+
+  .place-order-container {
+    flex-wrap: wrap;
+  }
+
+  .header-top {
+    height: 18vh;
+  }
+
+  .website-header {
+    margin-top: 10px;
+  }
+
+  .product-details-image {
+    width: 75%
+  }
+
+  .cart-summary-img-styling {
+    width: 50%;
   }
 }
