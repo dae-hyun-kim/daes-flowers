@@ -63,7 +63,7 @@ export default class CartSummary extends React.Component {
 
   render() {
     return (
-      <div className="d-flex flex-wrap justify-content-center">
+      <div className="d-flex flex-wrap justify-content-center cart-summary-container">
         <div className="col-10">
           <div onClick={this.changeView}>Back To Catalog</div>
           <h2>My Cart</h2>

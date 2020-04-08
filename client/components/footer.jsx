@@ -27,7 +27,7 @@ export default class Footer extends React.Component {
           </div>
           <div className="mt-4 footer-info">
             <h5 className="footer-titles">About Us:</h5>
-            <p onClick={this.changeToCatalog}>Our Story</p>
+            <p onClick={this.changeToCatalog} className="our-story-text">Our Story</p>
           </div>
           <div className="mt-4 footer-info">
             <h5 className="footer-titles">Follow Us</h5>
