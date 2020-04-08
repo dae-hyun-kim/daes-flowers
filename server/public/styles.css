@@ -274,6 +274,10 @@ body {
     text-align: center;
   }
 
+.remove {
+  font-size: 1.2em;
+}
+
 @media only screen
 and (max-device-width: 500px) {
   .card-dimensions {
