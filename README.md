@@ -28,3 +28,35 @@ Try the application at <a href="https://daes-flowers.danny-dae-kim.com/">https:/
 
 # Preview
 <img src="./server/public/images/daes-flowers.gif" alt="Dae's Flower website gif">
+
+# Development
+### System Requirements
+- Node.js 10 or higher
+- NPM 6 or higher
+- PostgreSQL 10 or higher
+- Express.js 4 or higher
+
+### Getting Started
+1. Clone the repository.
+
+  ```shell
+  git clone https://github.com/dae-hyun-kim/daes-flowers
+  cd daes-flowers
+  ```
+
+2. Install all dependencies with NPM.
+
+  ```shell
+  npm install
+  ```
+
+3. Import the example database to the PostgreSQL database.
+
+  ```shell
+  npm run db:import
+  ```
+
+4. Start the project. After starting, you can view the application by opening http://localhost:3000 in your browser.
+  ```shell
+  npm run dev
+  ```
