@@ -67,7 +67,7 @@ export default class App extends React.Component {
   }
 
   footerView() {
-    if (this.state.view.name === 'catalog' || this.state.view.name === 'cart' || this.state.view.name === 'details') {
+    if (this.state.view.name === 'catalog' || this.state.view.name === 'cart' || this.state.view.name === 'details' || this.state.view.name === 'checkout') {
       return (
         <Footer setView={this.setView}/>
       );

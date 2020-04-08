@@ -66,10 +66,10 @@ export default class CheckoutForm extends React.Component {
   render() {
     return (
       <div className="checkout-container d-flex justify-content-center align-items-center">
-        <div className="checkout-content">
+        <div className="checkout-content checkout-font">
           <div>
-            <h2>Checkout</h2>
-            <h3>{`Order Total: $${this.priceTotal()}`}</h3>
+            <h1 className="font-styling checkout-heading mb-4">Checkout</h1>
+            <h3 className="final-order-total">{`Order Total: $${this.priceTotal()}`}</h3>
           </div>
           <form>
 
@@ -94,9 +94,9 @@ export default class CheckoutForm extends React.Component {
               </label>
             </div>
 
-            <div className="d-flex justify-content-around">
-              <div onClick={this.changeView}>Continue Shopping</div>
-              <button onClick={this.handlePlaceOrder} className="btn btn-success">Place Order</button>
+            <div className="d-flex justify-content-between mt-4 place-order-container">
+              <button className="btn btn-pink continue-shopping-size mt-2 mb-2" onClick={this.changeView}>Continue Shopping</button>
+              <button onClick={this.handlePlaceOrder} className="btn btn-success mt-2 mb-2">Place Order</button>
             </div>
           </form>
         </div>

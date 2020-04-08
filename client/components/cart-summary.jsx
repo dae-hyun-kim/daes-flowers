@@ -18,7 +18,7 @@ export default class CartSummary extends React.Component {
     const cartItemList = this.props.cartItemList;
     if (cartItemList.length === 0) {
       return (
-        <h1>NO ITEMS IN CART</h1>
+        <h1 className="font-styling">NO ITEMS IN CART</h1>
       );
     } else {
       const allCartItems = cartItemList.map((cartItem, index) => {
@@ -57,7 +57,7 @@ export default class CartSummary extends React.Component {
     if (cartItemList.length === 0) {
       return '';
     } else {
-      return (<button onClick={this.toCheckOut} className="btn btn-success success">Checkout</button>);
+      return (<button onClick={this.toCheckOut} className="btn btn-success success mt-3 mb-3">Proceed to Checkout</button>);
     }
   }
 
@@ -66,14 +66,14 @@ export default class CartSummary extends React.Component {
       <div className="d-flex flex-wrap justify-content-center cart-summary-container">
         <div className="col-10 mt-3">
           <button className="btn btn-pink" onClick={this.changeView}>Back To Catalog</button>
-          <h1 className="mt-4 font-styling text-center">My Cart</h1>
+          <h1 className="mt-4 font-styling text-center my-cart-heading">My Cart</h1>
         </div>
         <div className="d-flex justify-content-center flex-wrap">
           {this.createCartItems()}
         </div>
-        <div className="col-10">
-          <div className="d-flex justify-content-around">
-            <h2>{`Item Total: $${this.priceTotal()}`}</h2>
+        <div className="col-12 mt-5 mb-5">
+          <div className="checkout-box">
+            <h2 className="font-styling mt-3 mb-3">{`Item Total: $${this.priceTotal()}`}</h2>
             {this.hideCheckoutButton()}
           </div>
         </div>
