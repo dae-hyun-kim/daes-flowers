@@ -34,7 +34,7 @@ Try the application at <a href="https://daes-flowers.danny-dae-kim.com/">https:/
 - Node.js 10 or higher
 - NPM 6 or higher
 - PostgreSQL 10 or higher
-- Express.js 4 or higher
+- Express 4 or higher
 
 ### Getting Started
 1. Clone the repository.
