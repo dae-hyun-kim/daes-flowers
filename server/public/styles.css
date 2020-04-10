@@ -21,7 +21,7 @@
 }
 
 .product-details {
-  height: 70vh;
+  height: 80vh;
 }
 .product-details-head {
   height: 10%;
@@ -409,7 +409,7 @@ and (max-device-width: 500px) {
   }
 
   .product-details-container {
-    height: 900px;
+    height: 1000px;
   }
 
   .cart-item-container {
@@ -559,7 +559,7 @@ and (max-device-width: 750px) {
   }
 
   .product-details-container {
-    height: 900px;
+    height: 1000px;
   }
 
   .cart-item-container {
@@ -707,7 +707,7 @@ and (max-device-width: 950px) {
   }
 
   .product-details-container {
-    height: 1000px;
+    height: 1200px;
   }
 
   .cart-item-container {
