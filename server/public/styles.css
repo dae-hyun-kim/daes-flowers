@@ -309,6 +309,18 @@ body {
   color: red;
 }
 
+.intro-modal {
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  position: fixed;
+  z-index: 10000;
+  left: 50%;
+  top: 50%;
+  margin-top: -250px;
+  margin-left: -250px
+}
+
 @media only screen
 and (max-device-width: 500px) {
   .card-dimensions {

@@ -9,6 +9,7 @@ import SalesSection from './sales-section';
 import AboutUs from './about-us';
 import ContactUs from './contact-us';
 import Footer from './footer';
+import IntroModal from './intro-modal';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -185,23 +186,26 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="col-12 all">
-        <div className="header-top d-flex justify-content-center">
-          <div className="col-12 mb-3">
-            <Header cartItemCount={this.state.cart ? this.state.cartQuantity : 0} setView={this.setView} cartItemList={this.state.cart}/>
-          </div>
-        </div>
-        <div className="col-12 header-divider"></div>
-        {this.carouselView()}
-        {this.salesSectionView()}
-        <div className="container">
-          <div>
-            <div>
-              {this.productViewChoice()}
+      <div>
+        <IntroModal/>
+        <div className="col-12 all">
+          <div className="header-top d-flex justify-content-center">
+            <div className="col-12 mb-3">
+              <Header cartItemCount={this.state.cart ? this.state.cartQuantity : 0} setView={this.setView} cartItemList={this.state.cart}/>
             </div>
           </div>
+          <div className="col-12 header-divider"></div>
+          {this.carouselView()}
+          {this.salesSectionView()}
+          <div className="container">
+            <div>
+              <div>
+                {this.productViewChoice()}
+              </div>
+            </div>
+          </div>
+          {this.footerView()}
         </div>
-        {this.footerView()}
       </div>
     );
   }
