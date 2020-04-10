@@ -4,10 +4,16 @@ export default class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: null
+      product: null,
+      quantity: 1,
+      error: false
     };
     this.handleClick = this.handleClick.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
+    this.changeQuantityHandler = this.changeQuantityHandler.bind(this);
+    this.incrementQuantity = this.incrementQuantity.bind(this);
+    this.decrementQuantity = this.decrementQuantity.bind(this);
+    this.displayError = this.displayError.bind(this);
   }
 
   handleClick(event) {
@@ -17,8 +23,49 @@ export default class ProductDetails extends React.Component {
   }
 
   addItemToCart(event) {
-    const addItemMethod = this.props.addToCart;
-    addItemMethod(this.state.product);
+    if (this.state.quantity === 0) {
+      this.setState({
+        error: true
+      });
+    } else {
+      this.setState({
+        error: false
+      });
+      const addItemMethod = this.props.addToCart;
+      addItemMethod(this.state.product, this.state.quantity);
+    }
+  }
+
+  changeQuantityHandler(event) {
+    this.setState({
+      quantity: parseInt(event.currentTarget.value)
+    });
+  }
+
+  incrementQuantity(event) {
+    let productQuantity = this.state.quantity;
+    this.setState({
+      quantity: ++productQuantity
+    });
+  }
+
+  decrementQuantity(event) {
+    let productQuantity = this.state.quantity;
+    if (productQuantity === 0) {
+      return (null);
+    } else {
+      this.setState({
+        quantity: --productQuantity
+      });
+    }
+  }
+
+  displayError() {
+    if (this.state.error === true) {
+      return (
+        <h4 className="font-styling text-center error-message mt-3">Please Enter Quantity</h4>
+      );
+    }
   }
 
   componentDidMount() {
@@ -49,6 +96,18 @@ export default class ProductDetails extends React.Component {
                 <h2 className="font-styling flower-name">{this.state.product.name}</h2>
                 <h3 className="font-styling">{`$${priceReformat}`}</h3>
                 <p className="flower-info-text">{this.state.product.shortDescription}</p>
+                <div>
+                  {this.displayError()}
+                </div>
+                <div className="d-flex justify-content-center">
+                  <div className="d-flex align-items-center justify-content-center quantity-changer" onClick={this.decrementQuantity}>
+                    <i className="fas fa-minus"></i>
+                  </div>
+                  <input type="number" className="text-center quantity-input" onChange={this.changeQuantityHandler} value={this.state.quantity}/>
+                  <div className="d-flex align-items-center justify-content-center quantity-changer" onClick={this.incrementQuantity}>
+                    <i className="fas fa-plus"></i>
+                  </div>
+                </div>
                 <div>
                   <button onClick={this.addItemToCart} className="btn btn-success success">Add To Cart</button>
                 </div>

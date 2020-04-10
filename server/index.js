@@ -63,7 +63,9 @@ app.get('/api/cart', (req, res, next) => {
           "products"."productId",
           "products"."image",
           "products"."name",
-          "products"."shortDescription"
+          "products"."shortDescription",
+          "cartItems"."quantity",
+          "cartItems"."totalprice"
   FROM "cartItems"
   JOIN "products" USING ("productId")
   WHERE "cartItems"."cartId" = $1
@@ -126,16 +128,17 @@ app.post('/api/cart', (req, res, next) => {
         }
       })
       .then(result => {
+        const quantity = req.body.quantity;
         const resultCartID = result.cartId;
         const resultPrice = result.price;
         req.session.cartId = resultCartID;
         const insertCartItemsSQL = `
-          INSERT INTO "cartItems" ("cartId", "productId", "price")
-          VALUES ($1, $2, $3)
+          INSERT INTO "cartItems" ("cartId", "productId", "price", "quantity", "totalprice")
+          VALUES ($1, $2, $3, $4, $5)
           RETURNING "cartItemId"
         `;
         return (
-          db.query(insertCartItemsSQL, [resultCartID, productId, resultPrice])
+          db.query(insertCartItemsSQL, [resultCartID, productId, resultPrice, quantity, (quantity * resultPrice)])
             .then(result => {
               return (result.rows[0].cartItemId);
             })
@@ -149,7 +152,9 @@ app.post('/api/cart', (req, res, next) => {
                 "products"."productId",
                 "products"."image",
                 "products"."name",
-                "products"."shortDescription"
+                "products"."shortDescription",
+                "cartItems"."quantity",
+                "cartItems"."totalprice"
         FROM "cartItems"
         JOIN "products" USING ("productId")
         WHERE "cartItems"."cartItemId" = $1
@@ -195,6 +200,25 @@ app.post('/api/orders', (req, res, next) => {
         }).catch(err => next(err))
     );
   }
+});
+
+app.put('/api/cart/:cartItemId', (req, res, next) => {
+  const cartItemId = req.params.cartItemId;
+  const newQuantity = req.body.quantity;
+  const newTotalPrice = req.body.newTotalPrice;
+  const updateSQL = `
+  UPDATE "cartItems"
+  SET "quantity" = $1,
+      "totalprice" = $2
+  WHERE "cartItemId" = $3
+  RETURNING *
+  `;
+
+  db.query(updateSQL, [newQuantity, newTotalPrice, cartItemId])
+    .then(result => {
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
 });
 
 app.delete('/api/cart/:cartItemId', (req, res, next) => {

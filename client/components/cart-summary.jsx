@@ -23,7 +23,7 @@ export default class CartSummary extends React.Component {
     } else {
       const allCartItems = cartItemList.map((cartItem, index) => {
         return (
-          <CartSummaryItem item={cartItem} key={index} removeFromCart={this.props.removeFromCart}/>
+          <CartSummaryItem item={cartItem} key={index} removeFromCart={this.props.removeFromCart} getCart={this.props.getCart}/>
         );
       });
       return allCartItems;
@@ -33,7 +33,7 @@ export default class CartSummary extends React.Component {
   priceTotal() {
     if (this.props.cartItemList) {
       const totalPrice = this.props.cartItemList.reduce((prev, cur) => {
-        return prev + cur.price;
+        return prev + cur.totalprice;
       }, 0);
       const priceTotalReformat = (totalPrice / 100).toFixed(2);
       return priceTotalReformat;
