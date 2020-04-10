@@ -18,7 +18,8 @@ export default class App extends React.Component {
         name: 'catalog',
         params: {}
       },
-      cart: []
+      cart: [],
+      cartQuantity: ''
     };
     this.setView = this.setView.bind(this);
     this.productViewChoice = this.productViewChoice.bind(this);
@@ -101,8 +102,12 @@ export default class App extends React.Component {
       .then(response => {
         return response.json();
       }).then(result => {
+        const totalQuantity = result.reduce((prev, cur) => {
+          return prev + cur.quantity;
+        }, 0);
         this.setState({
-          cart: result
+          cart: result,
+          cartQuantity: totalQuantity
         });
       });
   }
@@ -125,7 +130,8 @@ export default class App extends React.Component {
     }).then(result => {
       const addItemToCart = this.state.cart.concat(result);
       this.setState({
-        cart: addItemToCart
+        cart: addItemToCart,
+        cartQuantity: this.state.cartQuantity + result.quantity
       });
     });
   }
@@ -142,8 +148,12 @@ export default class App extends React.Component {
       .then(result => {
         const newCart = this.state.cart.slice();
         newCart.splice(theIndex, 1);
+        const totalQuantity = newCart.reduce((prev, cur) => {
+          return prev + cur.quantity;
+        }, 0);
         this.setState({
-          cart: newCart
+          cart: newCart,
+          cartQuantity: totalQuantity
         });
       });
   }
@@ -178,7 +188,7 @@ export default class App extends React.Component {
       <div className="col-12 all">
         <div className="header-top d-flex justify-content-center">
           <div className="col-12 mb-3">
-            <Header cartItemCount={this.state.cart ? this.state.cart.length : 0} setView={this.setView} cartItemList={this.state.cart}/>
+            <Header cartItemCount={this.state.cart ? this.state.cartQuantity : 0} setView={this.setView} cartItemList={this.state.cart}/>
           </div>
         </div>
         <div className="col-12 header-divider"></div>

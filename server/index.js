@@ -63,7 +63,9 @@ app.get('/api/cart', (req, res, next) => {
           "products"."productId",
           "products"."image",
           "products"."name",
-          "products"."shortDescription"
+          "products"."shortDescription",
+          "cartItems"."quantity",
+          "cartItems"."totalprice"
   FROM "cartItems"
   JOIN "products" USING ("productId")
   WHERE "cartItems"."cartId" = $1
@@ -131,12 +133,12 @@ app.post('/api/cart', (req, res, next) => {
         const resultPrice = result.price;
         req.session.cartId = resultCartID;
         const insertCartItemsSQL = `
-          INSERT INTO "cartItems" ("cartId", "productId", "price", "quantity")
-          VALUES ($1, $2, $3, $4)
+          INSERT INTO "cartItems" ("cartId", "productId", "price", "quantity", "totalprice")
+          VALUES ($1, $2, $3, $4, $5)
           RETURNING "cartItemId"
         `;
         return (
-          db.query(insertCartItemsSQL, [resultCartID, productId, resultPrice, quantity])
+          db.query(insertCartItemsSQL, [resultCartID, productId, resultPrice, quantity, (quantity * resultPrice)])
             .then(result => {
               return (result.rows[0].cartItemId);
             })
@@ -150,7 +152,9 @@ app.post('/api/cart', (req, res, next) => {
                 "products"."productId",
                 "products"."image",
                 "products"."name",
-                "products"."shortDescription"
+                "products"."shortDescription",
+                "cartItems"."quantity",
+                "cartItems"."totalprice"
         FROM "cartItems"
         JOIN "products" USING ("productId")
         WHERE "cartItems"."cartItemId" = $1

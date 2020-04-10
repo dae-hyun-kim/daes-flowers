@@ -50,7 +50,7 @@ export default class Header extends React.Component {
   priceTotal() {
     if (this.props.cartItemList) {
       const totalPrice = this.props.cartItemList.reduce((prev, cur) => {
-        return prev + cur.price;
+        return prev + cur.totalprice;
       }, 0);
       const priceTotalReformat = (totalPrice / 100).toFixed(2);
       return priceTotalReformat;
