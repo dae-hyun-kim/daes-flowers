@@ -26,47 +26,49 @@ export default class CartSummaryItem extends React.Component {
       quantity: this.state.quantity + 1,
       newTotalPrice: (this.state.quantity + 1) * this.props.item.price
     };
+    this.setState({
+      quantity: ++originalQuantity,
+      update: true
+    });
     fetch(`/api/cart/${cartItemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(newQuantity)
-    });
-    this.setState({
-      quantity: ++originalQuantity,
-      update: true
     });
   }
 
   decrementHandler(event) {
     event.preventDefault();
-    const cartItemId = event.currentTarget.id;
-    let originalQuantity = this.state.quantity;
-    const newQuantity = {
-      quantity: this.state.quantity - 1,
-      newTotalPrice: (this.state.quantity - 1) * this.props.item.price
-    };
-    fetch(`/api/cart/${cartItemId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newQuantity)
-    });
-    this.setState({
-      quantity: --originalQuantity,
-      update: true
-    });
+    if (this.state.quantity > 1) {
+      const cartItemId = event.currentTarget.id;
+      let originalQuantity = this.state.quantity;
+      const newQuantity = {
+        quantity: this.state.quantity - 1,
+        newTotalPrice: (this.state.quantity - 1) * this.props.item.price
+      };
+      this.setState({
+        quantity: --originalQuantity,
+        update: true
+      });
+      fetch(`/api/cart/${cartItemId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newQuantity)
+      });
+    }
   }
 
   componentDidUpdate() {
     if (this.state.update === true) {
-      const getCartMethod = this.props.getCart;
-      getCartMethod();
       this.setState({
         update: false
       });
+      const getCartMethod = this.props.getCart;
+      getCartMethod();
     }
   }
 
