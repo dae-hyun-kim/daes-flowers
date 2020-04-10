@@ -5,10 +5,13 @@ export default class ProductDetails extends React.Component {
     super(props);
     this.state = {
       product: null,
-      quantity: 3
+      quantity: 1
     };
     this.handleClick = this.handleClick.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
+    this.changeQuantityHandler = this.changeQuantityHandler.bind(this);
+    this.incrementQuantity = this.incrementQuantity.bind(this);
+    this.decrementQuantity = this.decrementQuantity.bind(this);
   }
 
   handleClick(event) {
@@ -20,6 +23,30 @@ export default class ProductDetails extends React.Component {
   addItemToCart(event) {
     const addItemMethod = this.props.addToCart;
     addItemMethod(this.state.product, this.state.quantity);
+  }
+
+  changeQuantityHandler(event) {
+    this.setState({
+      quantity: parseInt(event.currentTarget.value)
+    });
+  }
+
+  incrementQuantity(event) {
+    let productQuantity = this.state.quantity;
+    this.setState({
+      quantity: ++productQuantity
+    });
+  }
+
+  decrementQuantity(event) {
+    let productQuantity = this.state.quantity;
+    if (productQuantity === 0) {
+      return (null);
+    } else {
+      this.setState({
+        quantity: --productQuantity
+      });
+    }
   }
 
   componentDidMount() {
@@ -52,11 +79,11 @@ export default class ProductDetails extends React.Component {
                 <p className="flower-info-text">{this.state.product.shortDescription}</p>
                 <div className="d-flex justify-content-center">
                   <div>
-                    <i className="fas fa-minus"></i>
+                    <i className="fas fa-minus" onClick={this.decrementQuantity}></i>
                   </div>
-                  <input type="number"/>
+                  <input type="number" onChange={this.changeQuantityHandler} value={this.state.quantity}/>
                   <div>
-                    <i className="fas fa-plus"></i>
+                    <i className="fas fa-plus" onClick={this.incrementQuantity}></i>
                   </div>
                 </div>
                 <div>
