@@ -49,6 +49,15 @@ export default class ProductDetails extends React.Component {
                 <h2 className="font-styling flower-name">{this.state.product.name}</h2>
                 <h3 className="font-styling">{`$${priceReformat}`}</h3>
                 <p className="flower-info-text">{this.state.product.shortDescription}</p>
+                <div className="d-flex justify-content-center">
+                  <div>
+                    <i className="fas fa-minus"></i>
+                  </div>
+                  <input type="number"/>
+                  <div>
+                    <i className="fas fa-plus"></i>
+                  </div>
+                </div>
                 <div>
                   <button onClick={this.addItemToCart} className="btn btn-success success">Add To Cart</button>
                 </div>
