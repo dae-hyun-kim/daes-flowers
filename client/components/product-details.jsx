@@ -4,7 +4,8 @@ export default class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: null
+      product: null,
+      quantity: 3
     };
     this.handleClick = this.handleClick.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
@@ -18,7 +19,7 @@ export default class ProductDetails extends React.Component {
 
   addItemToCart(event) {
     const addItemMethod = this.props.addToCart;
-    addItemMethod(this.state.product);
+    addItemMethod(this.state.product, this.state.quantity);
   }
 
   componentDidMount() {

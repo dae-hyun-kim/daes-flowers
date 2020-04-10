@@ -107,14 +107,19 @@ export default class App extends React.Component {
       });
   }
 
-  addToCart(product) {
+  addToCart(product, quantity) {
+    const productQuantity = {
+      quantity: quantity
+    };
+
+    const theProductWithQuantity = { ...product, ...productQuantity };
     event.preventDefault();
     fetch('/api/cart', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(product)
+      body: JSON.stringify(theProductWithQuantity)
     }).then(response => {
       return (response.json());
     }).then(result => {
