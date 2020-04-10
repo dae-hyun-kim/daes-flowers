@@ -78,12 +78,12 @@ export default class ProductDetails extends React.Component {
                 <h3 className="font-styling">{`$${priceReformat}`}</h3>
                 <p className="flower-info-text">{this.state.product.shortDescription}</p>
                 <div className="d-flex justify-content-center">
-                  <div>
-                    <i className="fas fa-minus" onClick={this.decrementQuantity}></i>
+                  <div className="d-flex align-items-center justify-content-center quantity-changer" onClick={this.decrementQuantity}>
+                    <i className="fas fa-minus"></i>
                   </div>
-                  <input type="number" onChange={this.changeQuantityHandler} value={this.state.quantity}/>
-                  <div>
-                    <i className="fas fa-plus" onClick={this.incrementQuantity}></i>
+                  <input type="number" className="text-center quantity-input" onChange={this.changeQuantityHandler} value={this.state.quantity}/>
+                  <div className="d-flex align-items-center justify-content-center quantity-changer" onClick={this.incrementQuantity}>
+                    <i className="fas fa-plus"></i>
                   </div>
                 </div>
                 <div>
