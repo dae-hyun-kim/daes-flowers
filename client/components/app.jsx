@@ -20,7 +20,8 @@ export default class App extends React.Component {
         params: {}
       },
       cart: [],
-      cartQuantity: ''
+      cartQuantity: '',
+      introModal: true
     };
     this.setView = this.setView.bind(this);
     this.productViewChoice = this.productViewChoice.bind(this);
@@ -31,6 +32,7 @@ export default class App extends React.Component {
     this.salesSectionView = this.salesSectionView.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
     this.footerView = this.footerView.bind(this);
+    this.turnOffIntroModal = this.turnOffIntroModal.bind(this);
   }
 
   setView(name, params) {
@@ -180,6 +182,12 @@ export default class App extends React.Component {
     });
   }
 
+  turnOffIntroModal() {
+    this.setState({
+      introModal: false
+    });
+  }
+
   componentDidMount() {
     this.getCartItems();
   }
@@ -187,7 +195,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <IntroModal/>
+        {this.state.introModal === true ? <IntroModal turnOff={this.turnOffIntroModal}/> : null}
         <div className="col-12 all">
           <div className="header-top d-flex justify-content-center">
             <div className="col-12 mb-3">
