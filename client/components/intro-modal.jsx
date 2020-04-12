@@ -11,6 +11,7 @@ export default class IntroModal extends React.Component {
         <h6>By clicking the accept button below, you accept that no real purchases will be made and there will be no payment processing.
           Actual personal information, such as real names, addresses, and/or credit card numbers should be used at checkout.
         </h6>
+        <button className="btn btn-danger">Accept</button>
       </div>
     );
   }
