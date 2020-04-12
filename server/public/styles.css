@@ -309,6 +309,46 @@ body {
   color: red;
 }
 
+.intro-modal {
+  width: 500px;
+  height: 400px;
+  background-color: white;
+  font-family: 'Playfair Display', serif;
+  position: fixed;
+  z-index: 10000;
+  left: 50%;
+  top: 50%;
+  margin-top: -200px;
+  margin-left: -250px;
+  padding: 10px;
+  border-radius: 3%;
+}
+
+.intro-modal-inner {
+  padding: 10px;
+  border-radius: 3%;
+  border: 2px solid rgba(255, 235, 253, 1);
+}
+
+.quantity-input {
+  width: 50px;
+}
+
+.quantity-changer {
+  width: 30px;
+  background-color: rgb(255, 235, 253);
+}
+
+.quantity-changer:hover {
+  cursor: pointer;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 @media only screen
 and (max-device-width: 500px) {
   .card-dimensions {
@@ -430,25 +470,13 @@ and (max-device-width: 500px) {
   .place-order-container {
     flex-wrap: wrap;
   }
-}
 
-.quantity-input {
-  width: 50px;
+  .intro-modal {
+  width: 350px;
+  height: 435px;
+  margin-top: -215px;
+  margin-left: -175px;
 }
-
-.quantity-changer {
-  width: 30px;
-  background-color: rgb(255, 235, 253);
-}
-
-.quantity-changer:hover {
-  cursor: pointer;
-}
-
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
 }
 
 @media only screen
@@ -596,6 +624,17 @@ and (max-device-width: 750px) {
 
   .cart-summary-img-styling {
     width: 50%;
+  }
+
+  .intro-modal {
+    width: 600px;
+    height: 350px;
+    margin-top: -175px;
+    margin-left: -300px;
+  }
+
+  .intro-modal-inner {
+    padding: 5px;
   }
 }
 
