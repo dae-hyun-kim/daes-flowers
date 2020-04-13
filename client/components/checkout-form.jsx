@@ -60,9 +60,14 @@ export default class CheckoutForm extends React.Component {
   }
 
   handlePhoneNumber(event) {
-    this.setState({
-      phonenumber: event.currentTarget.value
-    });
+    const numRegex = RegExp(/^[0-9]*$/);
+    if (numRegex.test(event.currentTarget.value) === false) {
+      return null;
+    } else {
+      this.setState({
+        phonenumber: event.currentTarget.value
+      });
+    }
   }
 
   handleShippingAddress(event) {
@@ -130,6 +135,10 @@ export default class CheckoutForm extends React.Component {
         error: true
       });
     } else if (emailRegex.test(this.state.email) === false) {
+      this.setState({
+        error: true
+      });
+    } else if (this.state.phonenumber.length === 10) {
       this.setState({
         error: true
       });
@@ -207,7 +216,7 @@ export default class CheckoutForm extends React.Component {
 
               <label htmlFor="phone">
                 <h5>Phone Number:</h5>
-                <input htmlFor="phone" type="tel" onChange={this.handlePhoneNumber} value={this.state.phonenumber}/>
+                <input htmlFor="phone" type="tel" onChange={this.handlePhoneNumber} value={this.state.phonenumber} minLength="10" maxLength="10"/>
               </label>
             </div>
 
