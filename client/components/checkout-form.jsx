@@ -142,6 +142,14 @@ export default class CheckoutForm extends React.Component {
       this.setState({
         error: true
       });
+    } else if (this.state.shippingAddress.length < 5) {
+      this.setState({
+        error: true
+      });
+    } else if (this.state.shippingCity.length < 3 || this.state.shippingCity.length > 50) {
+      this.setState({
+        error: true
+      });
     } else {
       const placeOrderMethod = this.props.placeOrder;
       this.setState({
@@ -211,7 +219,7 @@ export default class CheckoutForm extends React.Component {
             <div>
               <label htmlFor="email">
                 <h5>Email:</h5>
-                <input htmlFor="email" type="email" onChange={this.handleEmail} value={this.state.email}/>
+                <input htmlFor="email" type="email" onChange={this.handleEmail} value={this.state.email} minLength="6" maxLength="254"/>
               </label>
 
               <label htmlFor="phone">
@@ -230,7 +238,7 @@ export default class CheckoutForm extends React.Component {
             <div>
               <label htmlFor="city">
                 <h5>City:</h5>
-                <input htmlFor="city" type="text" onChange={this.handleShippingCity} value={this.state.shippingCity}/>
+                <input htmlFor="city" type="text" onChange={this.handleShippingCity} value={this.state.shippingCity} minLength="3" maxLength="50"/>
               </label>
 
               <label htmlFor="state">
