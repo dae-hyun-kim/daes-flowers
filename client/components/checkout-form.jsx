@@ -5,9 +5,16 @@ export default class CheckoutForm extends React.Component {
     super(props);
     this.state = {
       name: '',
+      email: '',
       creditCard: '',
       shippingAddress: '',
-      error: false
+
+      error: false,
+      formValidation: {
+        name: true,
+        creditCard: true,
+        shippingAddress: true
+      }
     };
     this.handleName = this.handleName.bind(this);
     this.handleCreditCard = this.handleCreditCard.bind(this);
@@ -25,9 +32,14 @@ export default class CheckoutForm extends React.Component {
   }
 
   handleCreditCard(event) {
-    this.setState({
-      creditCard: event.currentTarget.value
-    });
+    const numRegex = RegExp(/^[0-9]*$/);
+    if (numRegex.test(event.currentTarget.value) === false) {
+      return null;
+    } else {
+      this.setState({
+        creditCard: event.currentTarget.value
+      });
+    }
   }
 
   handleShippingAddress(event) {
@@ -38,7 +50,11 @@ export default class CheckoutForm extends React.Component {
 
   handlePlaceOrder(event) {
     event.preventDefault();
-    if (!this.state.name || !this.state.creditCard || !this.state.shippingAddress) {
+    if (this.state.name.length > 65 || this.state.name.length < 5) {
+      this.setState({
+        error: true
+      });
+    } else if (this.state.creditCard.length < 16) {
       this.setState({
         error: true
       });
@@ -95,15 +111,68 @@ export default class CheckoutForm extends React.Component {
 
             <div>
               <label htmlFor="name" className="checkout">
-                <h5>Name:</h5>
-                <input htmlFor="name" type="text" onChange={this.handleName} value={this.state.name} className="checkout-inputs"/>
+                <h5>Full Name:</h5>
+                <input htmlFor="name" type="text" onChange={this.handleName} value={this.state.name} className="checkout-inputs" minLength="5" maxLength="65"/>
+              </label>
+            </div>
+
+            <div>
+              <label htmlFor="email">
+                <h5>Email:</h5>
+                <input htmlFor="email" type="email"/>
+              </label>
+
+              <label htmlFor="phone">
+                <h5>Phone Number:</h5>
+                <input htmlFor="phone" type="tel"/>
+              </label>
+            </div>
+
+            <div>
+              <label htmlFor="address">
+                <h5>Address:</h5>
+                <input htmlFor="address" type="text"/>
+              </label>
+            </div>
+
+            <div>
+              <label htmlFor="city">
+                <h5>City:</h5>
+                <input htmlFor="city" type="text"/>
+              </label>
+
+              <label htmlFor="state">
+                <h5>State:</h5>
+                <input htmlFor="state" type="text"/>
+              </label>
+
+              <label htmlFor="zip">
+                <h5>Zip</h5>
+                <input htmlFor="zip" type="tel"/>
               </label>
             </div>
 
             <div>
               <label htmlFor="creditCard" className="checkout">
                 <h5>Credit Card:</h5>
-                <input htmlFor="creditCard" type="text" onChange={this.handleCreditCard} value={this.state.creditCard} className="checkout-inputs"/>
+                <input htmlFor="creditCard" type="tel" onChange={this.handleCreditCard} value={this.state.creditCard} className="checkout-inputs" minLength="16" maxLength="16"/>
+              </label>
+            </div>
+
+            <div>
+              <label htmlFor="ccmonth">
+                <h5>Month:</h5>
+                <input htmlFor="ccmonth" type="number"/>
+              </label>
+
+              <label htmlFor="ccyear">
+                <h5>Year:</h5>
+                <input htmlFor="ccyear" type="number"/>
+              </label>
+
+              <label htmlFor="cvv">
+                <h5>CVV:</h5>
+                <input htmlFor="cvv" type="tel"/>
               </label>
             </div>
 
