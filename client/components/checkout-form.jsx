@@ -135,10 +135,6 @@ export default class CheckoutForm extends React.Component {
       this.setState({
         error: true
       });
-    } else if (this.state.creditCard.length < 16) {
-      this.setState({
-        error: true
-      });
     } else if (emailRegex.test(this.state.email) === false) {
       this.setState({
         error: true
@@ -160,6 +156,14 @@ export default class CheckoutForm extends React.Component {
         error: true
       });
     } else if (this.state.shippingZip.length !== 5) {
+      this.setState({
+        error: true
+      });
+    } else if (this.state.creditCard.length < 16) {
+      this.setState({
+        error: true
+      });
+    } else if (!this.state.expiremonth) {
       this.setState({
         error: true
       });
@@ -328,7 +332,21 @@ export default class CheckoutForm extends React.Component {
             <div>
               <label htmlFor="ccmonth">
                 <h5>Month:</h5>
-                <input htmlFor="ccmonth" type="number" onChange={this.handleExpireMonth} value={this.state.expiremonth}/>
+                <select htmlFor="ccmonth" type="number" onChange={this.handleExpireMonth} value={this.state.expiremonth}>
+                  <option defaultValue hidden></option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
               </label>
 
               <label htmlFor="ccyear">
