@@ -120,11 +120,16 @@ export default class CheckoutForm extends React.Component {
 
   handlePlaceOrder(event) {
     event.preventDefault();
+    const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     if (this.state.name.length > 65 || this.state.name.length < 5) {
       this.setState({
         error: true
       });
     } else if (this.state.creditCard.length < 16) {
+      this.setState({
+        error: true
+      });
+    } else if (emailRegex.test(this.state.email) === false) {
       this.setState({
         error: true
       });
