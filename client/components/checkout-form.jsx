@@ -136,47 +136,103 @@ export default class CheckoutForm extends React.Component {
   handlePlaceOrder(event) {
     event.preventDefault();
     const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const validationCheck = this.state.formValidation;
     if (this.state.name.length > 65 || this.state.name.length < 5) {
+      validationCheck.name = false;
+      this.setState({
+        error: true,
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.name = true;
+      this.setState({
+        formValidation: validationCheck
+      });
+    }
+
+    if (emailRegex.test(this.state.email) === false) {
+      validationCheck.email = false;
       this.setState({
         error: true
       });
-    } else if (emailRegex.test(this.state.email) === false) {
+    } else {
+      validationCheck.email = true;
+    }
+
+    if (this.state.phonenumber.length !== 10) {
+      validationCheck.phonenumber = false;
       this.setState({
         error: true
       });
-    } else if (this.state.phonenumber.length !== 10) {
+    } else {
+      validationCheck.phonenumber = true;
+    }
+
+    if (this.state.shippingAddress.length < 5) {
+      validationCheck.shippingAddress = false;
       this.setState({
         error: true
       });
-    } else if (this.state.shippingAddress.length < 5) {
+    } else {
+      validationCheck.shippingAddress = true;
+    }
+
+    if (this.state.shippingCity.length < 3 || this.state.shippingCity.length > 50) {
+      validationCheck.shippingCity = false;
       this.setState({
         error: true
       });
-    } else if (this.state.shippingCity.length < 3 || this.state.shippingCity.length > 50) {
+    } else {
+      validationCheck.shippingCity = true;
+    }
+
+    if (!this.state.shippingState) {
+      validationCheck.shippingState = false;
       this.setState({
         error: true
       });
-    } else if (!this.state.shippingState) {
+    } else {
+      validationCheck.shippingState = true;
+    }
+
+    if (this.state.shippingZip.length !== 5) {
+      validationCheck.shippingZip = false;
       this.setState({
         error: true
       });
-    } else if (this.state.shippingZip.length !== 5) {
+    } else {
+      validationCheck.shippingZip = true;
+    }
+
+    if (this.state.creditCard.length < 16) {
+      validationCheck.creditCard = false;
       this.setState({
         error: true
       });
-    } else if (this.state.creditCard.length < 16) {
+    } else {
+      validationCheck.creditCard = true;
+    }
+
+    if (!this.state.expiremonth) {
+      validationCheck.expiremonth = false;
       this.setState({
         error: true
       });
-    } else if (!this.state.expiremonth) {
+    } else {
+      validationCheck.expiremonth = true;
+    }
+
+    if (!this.state.expireyear) {
+      validationCheck.expireyear = false;
       this.setState({
         error: true
       });
-    } else if (!this.state.expireyear) {
-      this.setState({
-        error: true
-      });
-    } else if (this.state.cvv.length < 3 || this.state.cvv.length > 4) {
+    } else {
+      validationCheck.expireyear = true;
+    }
+
+    if (this.state.cvv.length < 3 || this.state.cvv.length > 4) {
+      validationCheck.cvv = false;
       this.setState({
         error: true
       });
@@ -243,6 +299,7 @@ export default class CheckoutForm extends React.Component {
               <label htmlFor="name" className="checkout">
                 <h5>Full Name:</h5>
                 <input htmlFor="name" type="text" onChange={this.handleName} value={this.state.name} className="checkout-inputs" minLength="5" maxLength="65"/>
+                {this.state.formValidation.name === false ? <p>Please Enter Full Name - Must be at least 5 letters</p> : null}
               </label>
             </div>
 
@@ -250,11 +307,13 @@ export default class CheckoutForm extends React.Component {
               <label htmlFor="email">
                 <h5>Email:</h5>
                 <input htmlFor="email" type="email" onChange={this.handleEmail} value={this.state.email} minLength="6" maxLength="254"/>
+                {this.state.formValidation.email === false ? <p>Please Enter a Valid Email</p> : null}
               </label>
 
               <label htmlFor="phone">
                 <h5>Phone Number:</h5>
                 <input htmlFor="phone" type="tel" onChange={this.handlePhoneNumber} value={this.state.phonenumber} minLength="10" maxLength="10"/>
+                {this.state.formValidation.phonenumber === false ? <p>Please Enter a Valid Phone Number</p> : null}
               </label>
             </div>
 
@@ -263,12 +322,14 @@ export default class CheckoutForm extends React.Component {
                 <h5>Shipping Address:</h5>
                 <textarea htmlFor="shippingAddress" name="address" id="address" onChange={this.handleShippingAddress} value={this.state.shippingAddress} className="checkout-inputs"></textarea>
               </label>
+              {this.state.formValidation.shippingAddress === false ? <p>Please Enter a Valid Shipping Address</p> : null}
             </div>
 
             <div>
               <label htmlFor="city">
                 <h5>City:</h5>
                 <input htmlFor="city" type="text" onChange={this.handleShippingCity} value={this.state.shippingCity} minLength="3" maxLength="50"/>
+                {this.state.formValidation.shippingCity === false ? <p>Please Enter a Valid City</p> : null}
               </label>
 
               <label htmlFor="state">
@@ -327,11 +388,13 @@ export default class CheckoutForm extends React.Component {
                   <option value="WI">Wisconsin</option>
                   <option value="WY">Wyoming</option>
                 </select>
+                {this.state.formValidation.shippingState === false ? <p>Please Select a State</p> : null}
               </label>
 
               <label htmlFor="zip">
                 <h5>Zip</h5>
                 <input htmlFor="zip" type="tel" onChange={this.handleShippingZip} value={this.state.shippingZip} minLength="5" maxLength="5"/>
+                {this.state.formValidation.shippingZip === false ? <p>Please Enter a Valid Zip Code</p> : null}
               </label>
             </div>
 
@@ -339,6 +402,7 @@ export default class CheckoutForm extends React.Component {
               <label htmlFor="creditCard" className="checkout">
                 <h5>Credit Card:</h5>
                 <input htmlFor="creditCard" type="tel" onChange={this.handleCreditCard} value={this.state.creditCard} className="checkout-inputs" minLength="16" maxLength="16"/>
+                {this.state.formValidation.creditCard === false ? <p>Please Enter a Valid Credit Card Number</p> : null}
               </label>
             </div>
 
@@ -360,6 +424,7 @@ export default class CheckoutForm extends React.Component {
                   <option value="11">11</option>
                   <option value="12">12</option>
                 </select>
+                {this.state.formValidation.expiremonth === false ? <p>Please Select a Expiration Month</p> : null}
               </label>
 
               <label htmlFor="ccyear">
@@ -377,11 +442,13 @@ export default class CheckoutForm extends React.Component {
                   <option value="2028">2028</option>
                   <option value="2029">2029</option>
                 </select>
+                {this.state.formValidation.expireyear === false ? <p>Please Select a Expiration Year</p> : null}
               </label>
 
               <label htmlFor="cvv">
                 <h5>CVV:</h5>
                 <input htmlFor="cvv" type="tel" onChange={this.handleCVV} value={this.state.cvv} minLength="3" maxLength="4"/>
+                {this.state.formValidation.cvv === false ? <p>Please Enter a Valid CVV</p> : null}
               </label>
             </div>
 
