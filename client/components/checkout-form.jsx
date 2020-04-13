@@ -89,9 +89,14 @@ export default class CheckoutForm extends React.Component {
   }
 
   handleShippingZip(event) {
-    this.setState({
-      shippingZip: event.currentTarget.value
-    });
+    const numRegex = RegExp(/^[0-9]*$/);
+    if (numRegex.test(event.currentTarget.value) === false) {
+      return null;
+    } else {
+      this.setState({
+        shippingZip: event.currentTarget.value
+      });
+    }
   }
 
   handleCreditCard(event) {
@@ -138,7 +143,7 @@ export default class CheckoutForm extends React.Component {
       this.setState({
         error: true
       });
-    } else if (this.state.phonenumber.length === 10) {
+    } else if (this.state.phonenumber.length !== 10) {
       this.setState({
         error: true
       });
@@ -151,6 +156,10 @@ export default class CheckoutForm extends React.Component {
         error: true
       });
     } else if (!this.state.shippingState) {
+      this.setState({
+        error: true
+      });
+    } else if (this.state.shippingZip.length !== 5) {
       this.setState({
         error: true
       });
@@ -305,7 +314,7 @@ export default class CheckoutForm extends React.Component {
 
               <label htmlFor="zip">
                 <h5>Zip</h5>
-                <input htmlFor="zip" type="tel" onChange={this.handleShippingZip} value={this.state.shippingZip}/>
+                <input htmlFor="zip" type="tel" onChange={this.handleShippingZip} value={this.state.shippingZip} minLength="5" maxLength="5"/>
               </label>
             </div>
 
