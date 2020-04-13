@@ -324,7 +324,22 @@ body {
   border-radius: 3%;
 }
 
-.intro-modal-inner {
+.continue-shopping-modal {
+  width: 400px;
+  height: 260px;
+  background-color: white;
+  font-family: 'Playfair Display', serif;
+  position: fixed;
+  z-index: 10000;
+  left: 50%;
+  top: 50%;
+  margin-top: -150px;
+  margin-left: -200px;
+  padding: 12px;
+  border-radius: 3%;
+}
+
+.intro-modal-inner, .continue-shopping-modal-inner {
   padding: 10px;
   border-radius: 3%;
   border: 2px solid rgba(255, 235, 253, 1);
