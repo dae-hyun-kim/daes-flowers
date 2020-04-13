@@ -492,6 +492,11 @@ and (max-device-width: 500px) {
   margin-top: -215px;
   margin-left: -175px;
 }
+
+.continue-shopping-modal {
+  width: 350px;
+  margin-left: -175px;
+}
 }
 
 @media only screen
