@@ -123,9 +123,14 @@ export default class CheckoutForm extends React.Component {
   }
 
   handleCVV(event) {
-    this.setState({
-      cvv: event.currentTarget.value
-    });
+    const numRegex = RegExp(/^[0-9]*$/);
+    if (numRegex.test(event.currentTarget.value) === false) {
+      return null;
+    } else {
+      this.setState({
+        cvv: event.currentTarget.value
+      });
+    }
   }
 
   handlePlaceOrder(event) {
@@ -168,6 +173,10 @@ export default class CheckoutForm extends React.Component {
         error: true
       });
     } else if (!this.state.expireyear) {
+      this.setState({
+        error: true
+      });
+    } else if (this.state.cvv.length < 3 || this.state.cvv.length > 4) {
       this.setState({
         error: true
       });
@@ -372,7 +381,7 @@ export default class CheckoutForm extends React.Component {
 
               <label htmlFor="cvv">
                 <h5>CVV:</h5>
-                <input htmlFor="cvv" type="tel" onChange={this.handleCVV} value={this.state.cvv}/>
+                <input htmlFor="cvv" type="tel" onChange={this.handleCVV} value={this.state.cvv} minLength="3" maxLength="4"/>
               </label>
             </div>
 
