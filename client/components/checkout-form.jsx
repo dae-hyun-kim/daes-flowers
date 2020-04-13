@@ -6,14 +6,28 @@ export default class CheckoutForm extends React.Component {
     this.state = {
       name: '',
       email: '',
-      creditCard: '',
+      phonenumber: '',
       shippingAddress: '',
-
+      shippingCity: '',
+      shippingState: '',
+      shippingZip: '',
+      creditCard: '',
+      expiremonth: '',
+      expireyear: '',
+      cvv: '',
       error: false,
       formValidation: {
         name: true,
+        email: true,
+        phonenumber: true,
+        shippingAddress: true,
+        shippingCity: true,
+        shippingState: true,
+        shippingZip: true,
         creditCard: true,
-        shippingAddress: true
+        expiremonth: true,
+        expireyear: true,
+        cvv: true
       }
     };
     this.handleName = this.handleName.bind(this);
@@ -23,11 +37,55 @@ export default class CheckoutForm extends React.Component {
     this.changeView = this.changeView.bind(this);
     this.priceTotal = this.priceTotal.bind(this);
     this.displayError = this.displayError.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
+    this.handlePhoneNumber = this.handlePhoneNumber.bind(this);
+    this.handleShippingCity = this.handleShippingCity.bind(this);
+    this.handleShippingState = this.handleShippingState.bind(this);
+    this.handleShippingZip = this.handleShippingZip.bind(this);
+    this.handleExpireMonth = this.handleExpireMonth.bind(this);
+    this.handleExpireYear = this.handleExpireYear.bind(this);
+    this.handleCVV = this.handleCVV.bind(this);
   }
 
   handleName(event) {
     this.setState({
       name: event.currentTarget.value
+    });
+  }
+
+  handleEmail(event) {
+    this.setState({
+      email: event.currentTarget.value
+    });
+  }
+
+  handlePhoneNumber(event) {
+    this.setState({
+      phonenumber: event.currentTarget.value
+    });
+  }
+
+  handleShippingAddress(event) {
+    this.setState({
+      shippingAddress: event.currentTarget.value
+    });
+  }
+
+  handleShippingCity(event) {
+    this.setState({
+      shippingCity: event.currentTarget.value
+    });
+  }
+
+  handleShippingState(event) {
+    this.setState({
+      shippingState: event.currentTarget.value
+    });
+  }
+
+  handleShippingZip(event) {
+    this.setState({
+      shippingZip: event.currentTarget.value
     });
   }
 
@@ -42,9 +100,21 @@ export default class CheckoutForm extends React.Component {
     }
   }
 
-  handleShippingAddress(event) {
+  handleExpireMonth(event) {
     this.setState({
-      shippingAddress: event.currentTarget.value
+      expiremonth: event.currentTarget.value
+    });
+  }
+
+  handleExpireYear(event) {
+    this.setState({
+      expireyear: event.currentTarget.value
+    });
+  }
+
+  handleCVV(event) {
+    this.setState({
+      cvv: event.currentTarget.value
     });
   }
 
@@ -65,8 +135,16 @@ export default class CheckoutForm extends React.Component {
       });
       const customerInfoObject = {
         name: this.state.name,
+        email: this.state.email,
+        phonenumber: this.state.phonenumber,
+        shippingAddress: this.state.shippingAddress,
+        city: this.state.shippingCity,
+        state: this.state.shippingState,
+        zip: this.state.shippingZip,
         creditCard: this.state.creditCard,
-        shippingAddress: this.state.shippingAddress
+        expiremonth: this.state.expiremonth,
+        expireyear: this.state.expireyear,
+        cvv: this.state.cvv
       };
       placeOrderMethod(customerInfoObject);
     }
@@ -119,36 +197,36 @@ export default class CheckoutForm extends React.Component {
             <div>
               <label htmlFor="email">
                 <h5>Email:</h5>
-                <input htmlFor="email" type="email"/>
+                <input htmlFor="email" type="email" onChange={this.handleEmail} value={this.state.email}/>
               </label>
 
               <label htmlFor="phone">
                 <h5>Phone Number:</h5>
-                <input htmlFor="phone" type="tel"/>
+                <input htmlFor="phone" type="tel" onChange={this.handlePhoneNumber} value={this.state.phonenumber}/>
               </label>
             </div>
 
             <div>
-              <label htmlFor="address">
-                <h5>Address:</h5>
-                <input htmlFor="address" type="text"/>
+              <label htmlFor="address" className="checkout">
+                <h5>Shipping Address:</h5>
+                <textarea htmlFor="shippingAddress" name="address" id="address" onChange={this.handleShippingAddress} value={this.state.shippingAddress} className="checkout-inputs"></textarea>
               </label>
             </div>
 
             <div>
               <label htmlFor="city">
                 <h5>City:</h5>
-                <input htmlFor="city" type="text"/>
+                <input htmlFor="city" type="text" onChange={this.handleShippingCity} value={this.state.shippingCity}/>
               </label>
 
               <label htmlFor="state">
                 <h5>State:</h5>
-                <input htmlFor="state" type="text"/>
+                <input htmlFor="state" type="text" onChange={this.handleShippingState} value={this.state.shippingState}/>
               </label>
 
               <label htmlFor="zip">
                 <h5>Zip</h5>
-                <input htmlFor="zip" type="tel"/>
+                <input htmlFor="zip" type="tel" onChange={this.handleShippingZip} value={this.state.shippingZip}/>
               </label>
             </div>
 
@@ -162,24 +240,17 @@ export default class CheckoutForm extends React.Component {
             <div>
               <label htmlFor="ccmonth">
                 <h5>Month:</h5>
-                <input htmlFor="ccmonth" type="number"/>
+                <input htmlFor="ccmonth" type="number" onChange={this.handleExpireMonth} value={this.state.expiremonth}/>
               </label>
 
               <label htmlFor="ccyear">
                 <h5>Year:</h5>
-                <input htmlFor="ccyear" type="number"/>
+                <input htmlFor="ccyear" type="number" onChange={this.handleExpireYear} value={this.state.expireyear}/>
               </label>
 
               <label htmlFor="cvv">
                 <h5>CVV:</h5>
-                <input htmlFor="cvv" type="tel"/>
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="shippingAddress" className="checkout">
-                <h5>Shipping Address:</h5>
-                <textarea htmlFor="shippingAddress" name="address" id="address" onChange={this.handleShippingAddress} value={this.state.shippingAddress} className="checkout-inputs"></textarea>
+                <input htmlFor="cvv" type="tel" onChange={this.handleCVV} value={this.state.cvv}/>
               </label>
             </div>
 
