@@ -57,7 +57,7 @@
 }
 
 .checkout-container{
-  height: 800px;
+  height: 1200px;
 }
 
 .checkout-content {
@@ -71,7 +71,8 @@
 }
 
 .checkout-inputs{
-  width: 100%;
+  height: 40px;
+  font-size: 20px;
 }
 
 body {
@@ -358,6 +359,36 @@ body {
   cursor: pointer;
 }
 
+.form-error {
+  font-size: 12px;
+  color: red;
+}
+
+.email-input {
+  width: 300px;
+}
+
+.phone-number-input {
+  width: 250px;
+}
+
+.city-input {
+  width: 200px;
+}
+
+.zip-input {
+  width: 150px;
+}
+
+.cvv-input {
+  width: 100px;
+}
+
+.form-inputs {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -496,6 +527,14 @@ and (max-device-width: 500px) {
 .continue-shopping-modal {
   width: 350px;
   margin-left: -175px;
+}
+
+.checkout-container {
+  height: 1800px;
+}
+
+.state-label {
+  width: 207px;
 }
 }
 
@@ -656,6 +695,10 @@ and (max-device-width: 750px) {
   .intro-modal-inner {
     padding: 5px;
   }
+
+  .checkout-container {
+    height: 1500px;
+  }
 }
 
 @media only screen
@@ -811,6 +854,10 @@ and (max-device-width: 950px) {
 
   .fa-shopping-cart {
     font-size: 2em;
+  }
+
+  .checkout-container {
+    height: 1350px;
   }
 }
 
