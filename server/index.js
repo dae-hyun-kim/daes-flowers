@@ -173,8 +173,16 @@ app.post('/api/cart', (req, res, next) => {
 app.post('/api/orders', (req, res, next) => {
   const customerCartId = req.session.cartId;
   const customerName = req.body.name;
-  const customerCreditCard = req.body.creditCard;
+  const customerEmail = req.body.email;
+  const customerPhoneNumber = req.body.phonenumber;
   const customerAddress = req.body.shippingAddress;
+  const customerCity = req.body.city;
+  const customerState = req.body.state;
+  const customerZip = req.body.zip;
+  const customerCreditCard = req.body.creditCard;
+  const customerCreditCardMonth = req.body.expiremonth;
+  const customerCreditCardYear = req.body.expireyear;
+  const customerCreditCardCvv = req.body.cvv;
   if (!customerCartId) {
     next(new ClientError('Cart ID is Invalid', 400));
   } else if (!customerName) {
@@ -185,12 +193,12 @@ app.post('/api/orders', (req, res, next) => {
     next(new ClientError('Please enter A Valid Address'), 400);
   } else {
     const customerInfoSQL = `
-    INSERT INTO "orders" ("cartId", "name", "creditCard", "shippingAddress")
-    VALUES ($1, $2, $3, $4)
-    RETURNING "orderId", "createdAt", "name", "creditCard", "shippingAddress"
+    INSERT INTO "orders" ("cartId", "name", "email", "phonenumber", "shippingAddress", "city", "state", "zip", "creditCard", "expiremonth", "expireyear", "cvv")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+    RETURNING *
     `;
     return (
-      db.query(customerInfoSQL, [customerCartId, customerName, customerCreditCard, customerAddress])
+      db.query(customerInfoSQL, [customerCartId, customerName, customerEmail, customerPhoneNumber, customerAddress, customerCity, customerState, customerZip, customerCreditCard, customerCreditCardMonth, customerCreditCardYear, customerCreditCardCvv])
         .then(result => {
           const customerInfo = result.rows[0];
           delete req.session.cartId;
