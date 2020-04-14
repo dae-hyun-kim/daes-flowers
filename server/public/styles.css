@@ -409,6 +409,10 @@ body {
   border-radius: 5px;
 }
 
+.thank-you-button {
+  font-size: 1.5em;
+}
+
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -550,7 +554,7 @@ and (max-device-width: 500px) {
 }
 
 .checkout-container {
-  height: 1800px;
+  height: 2100px;
 }
 
 .state-label {
@@ -722,7 +726,7 @@ and (max-device-width: 750px) {
   }
 
   .checkout-container {
-    height: 1500px;
+    height: 1625px;
   }
 }
 
@@ -882,7 +886,7 @@ and (max-device-width: 950px) {
   }
 
   .checkout-container {
-    height: 1350px;
+    height: 1500px;
   }
 }
 

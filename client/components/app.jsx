@@ -10,6 +10,7 @@ import AboutUs from './about-us';
 import ContactUs from './contact-us';
 import Footer from './footer';
 import IntroModal from './intro-modal';
+import ThankYouPage from './thank-you-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -67,6 +68,8 @@ export default class App extends React.Component {
       return <AboutUs />;
     } else if (this.state.view.name === 'contactUs') {
       return <ContactUs/>;
+    } else if (this.state.view.name === 'thank-you') {
+      return <ThankYouPage setView={this.setView}/>;
     }
   }
 
@@ -175,9 +178,10 @@ export default class App extends React.Component {
       this.setState({
         cart: [],
         view: {
-          name: 'catalog',
+          name: 'thank-you',
           params: {}
-        }
+        },
+        cartQuantity: ''
       });
     });
   }
