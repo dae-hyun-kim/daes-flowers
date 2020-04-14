@@ -27,7 +27,8 @@ export default class CheckoutForm extends React.Component {
         expiremonth: true,
         expireyear: true,
         cvv: true
-      }
+      },
+      checkbox: null
     };
     this.handleName = this.handleName.bind(this);
     this.handleCreditCard = this.handleCreditCard.bind(this);
@@ -43,6 +44,7 @@ export default class CheckoutForm extends React.Component {
     this.handleExpireMonth = this.handleExpireMonth.bind(this);
     this.handleExpireYear = this.handleExpireYear.bind(this);
     this.handleCVV = this.handleCVV.bind(this);
+    this.handleCheckBox = this.handleCheckBox.bind(this);
   }
 
   handleName(event) {
@@ -127,6 +129,18 @@ export default class CheckoutForm extends React.Component {
     } else {
       this.setState({
         cvv: event.currentTarget.value
+      });
+    }
+  }
+
+  handleCheckBox(event) {
+    if (this.state.checkbox === false) {
+      this.setState({
+        checkbox: true
+      });
+    } else {
+      this.setState({
+        checkbox: false
       });
     }
   }
@@ -247,8 +261,16 @@ export default class CheckoutForm extends React.Component {
         this.state.formValidation.creditCard === false ||
         this.state.formValidation.expiremonth === false ||
         this.state.formValidation.expireyear === false ||
-        this.state.formValidation.cvv === false) {
-      return null;
+        this.state.formValidation.cvv === false ||
+        this.state.checkbox === false ||
+        this.state.checkbox === null) {
+      if (this.state.checkbox === null) {
+        this.setState({
+          checkbox: false
+        });
+      } else {
+        return null;
+      }
     } else {
       const placeOrderMethod = this.props.placeOrder;
       this.setState({
@@ -454,6 +476,13 @@ export default class CheckoutForm extends React.Component {
                   <h5>CVV:</h5>
                   <input htmlFor="cvv" type="tel" onChange={this.handleCVV} value={this.state.cvv} minLength="3" maxLength="4" className="checkout-inputs form-inputs w-100"/>
                   {this.state.formValidation.cvv === false ? <p className="form-error">Invalid CVV</p> : null}
+                </label>
+              </div>
+              <div className="mt-2">
+                <label htmlFor="checkbox">
+                  <div><input type="checkbox" className="mr-1" onClick={this.handleCheckBox}/>I accept that this website is for demonstration purposes only and no real purchases will be made. No real personal information should
+                  be used in the submission of this form.</div>
+                  {this.state.checkbox === false ? <p className="form-error">Terms are required for checkout</p> : null}
                 </label>
               </div>
 
