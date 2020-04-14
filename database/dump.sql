@@ -74,7 +74,9 @@ CREATE TABLE public."cartItems" (
     "cartItemId" integer NOT NULL,
     "cartId" integer NOT NULL,
     "productId" integer NOT NULL,
-    price integer NOT NULL
+    price integer NOT NULL,
+    quantity integer,
+    totalprice integer
 );
 
 
@@ -138,7 +140,15 @@ CREATE TABLE public.orders (
     name text NOT NULL,
     "creditCard" text NOT NULL,
     "shippingAddress" text NOT NULL,
-    "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
+    "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL,
+    email text,
+    phonenumber bigint,
+    city text,
+    state text,
+    zip integer,
+    expiremonth integer,
+    expireyear integer,
+    cvv integer
 );
 
 
@@ -228,119 +238,153 @@ ALTER TABLE ONLY public.products ALTER COLUMN "productId" SET DEFAULT nextval('p
 -- Data for Name: cartItems; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
-1	16	2	2595
-2	17	2	2595
-3	18	2	2595
-4	19	2	2595
-5	20	2	2595
-6	21	1	2999
-7	21	1	2999
-8	21	1	2999
-9	21	1	2999
-10	21	1	2999
-11	22	1	2999
-12	23	1	2999
-13	24	1	2999
-14	25	1	2999
-15	25	1	2999
-16	25	1	2999
-17	25	5	9900
-18	25	1	2999
-19	25	1	2999
-20	25	5	9900
-21	25	6	830
-22	25	4	999
-23	26	1	2999
-24	26	1	2999
-25	26	2	2595
-26	26	2	2595
-27	26	1	2999
-28	26	2	2595
-29	26	1	2999
-30	26	2	2595
-31	26	2	2595
-32	26	2	2595
-33	26	1	2999
-34	26	1	2999
-35	26	1	2999
-36	26	2	2595
-37	26	2	2595
-38	26	1	2999
-39	26	1	2999
-40	26	1	2999
-41	26	1	2999
-42	26	1	2999
-43	26	1	2999
-44	26	1	2999
-45	26	1	2999
-46	26	1	2999
-47	26	1	2999
-48	26	1	2999
-49	26	1	2999
-50	26	1	2999
-51	26	1	2999
-52	26	1	2999
-53	26	1	2999
-54	26	2	2595
-55	26	1	2999
-56	26	1	2999
-57	26	1	2999
-58	26	2	2595
-59	26	1	2999
-60	27	1	2999
-61	27	2	2595
-62	28	1	2999
-63	28	3	2900
-64	29	1	2999
-65	29	2	2595
-66	29	3	2900
-67	30	1	2999
-68	31	1	2999
-69	32	1	2999
-70	33	2	2595
-71	34	1	2999
-72	35	1	2999
-73	36	1	2999
-74	37	1	2999
-75	38	1	2999
-76	38	3	2900
-77	38	1	2999
-78	39	1	2999
-79	39	5	9900
-80	40	1	2999
-81	40	2	2595
-82	40	3	2900
-83	40	1	2999
-84	41	1	2999
-85	42	2	2595
-86	42	4	999
-87	43	1	2999
-88	44	1	2999
-89	45	2	2595
-90	45	2	2595
-91	45	3	2900
-92	46	1	2999
-93	45	3	2900
-94	47	1	2999
-95	47	1	2999
-96	48	5	9900
-97	48	5	9900
-98	49	1	2999
-99	50	1	2999
-100	50	2	2595
-101	50	1	2999
-106	51	3	2900
-107	52	1	2999
-108	52	2	2595
-109	53	4	999
-110	53	6	830
-111	53	5	9900
-171	55	14	599
-172	56	2	299
-173	57	3	299
-174	57	3	299
-175	58	3	299
+COPY public."cartItems" ("cartItemId", "cartId", "productId", price, quantity, totalprice) FROM stdin;
+1	16	2	2595	\N	\N
+2	17	2	2595	\N	\N
+3	18	2	2595	\N	\N
+4	19	2	2595	\N	\N
+5	20	2	2595	\N	\N
+6	21	1	2999	\N	\N
+7	21	1	2999	\N	\N
+8	21	1	2999	\N	\N
+9	21	1	2999	\N	\N
+10	21	1	2999	\N	\N
+11	22	1	2999	\N	\N
+12	23	1	2999	\N	\N
+13	24	1	2999	\N	\N
+14	25	1	2999	\N	\N
+15	25	1	2999	\N	\N
+16	25	1	2999	\N	\N
+17	25	5	9900	\N	\N
+18	25	1	2999	\N	\N
+19	25	1	2999	\N	\N
+20	25	5	9900	\N	\N
+21	25	6	830	\N	\N
+22	25	4	999	\N	\N
+23	26	1	2999	\N	\N
+24	26	1	2999	\N	\N
+25	26	2	2595	\N	\N
+26	26	2	2595	\N	\N
+27	26	1	2999	\N	\N
+28	26	2	2595	\N	\N
+29	26	1	2999	\N	\N
+30	26	2	2595	\N	\N
+31	26	2	2595	\N	\N
+32	26	2	2595	\N	\N
+33	26	1	2999	\N	\N
+34	26	1	2999	\N	\N
+35	26	1	2999	\N	\N
+36	26	2	2595	\N	\N
+37	26	2	2595	\N	\N
+38	26	1	2999	\N	\N
+39	26	1	2999	\N	\N
+40	26	1	2999	\N	\N
+41	26	1	2999	\N	\N
+42	26	1	2999	\N	\N
+43	26	1	2999	\N	\N
+44	26	1	2999	\N	\N
+45	26	1	2999	\N	\N
+46	26	1	2999	\N	\N
+47	26	1	2999	\N	\N
+48	26	1	2999	\N	\N
+49	26	1	2999	\N	\N
+50	26	1	2999	\N	\N
+51	26	1	2999	\N	\N
+52	26	1	2999	\N	\N
+53	26	1	2999	\N	\N
+54	26	2	2595	\N	\N
+55	26	1	2999	\N	\N
+56	26	1	2999	\N	\N
+57	26	1	2999	\N	\N
+58	26	2	2595	\N	\N
+59	26	1	2999	\N	\N
+60	27	1	2999	\N	\N
+61	27	2	2595	\N	\N
+62	28	1	2999	\N	\N
+63	28	3	2900	\N	\N
+64	29	1	2999	\N	\N
+65	29	2	2595	\N	\N
+66	29	3	2900	\N	\N
+67	30	1	2999	\N	\N
+68	31	1	2999	\N	\N
+69	32	1	2999	\N	\N
+70	33	2	2595	\N	\N
+71	34	1	2999	\N	\N
+72	35	1	2999	\N	\N
+73	36	1	2999	\N	\N
+74	37	1	2999	\N	\N
+75	38	1	2999	\N	\N
+76	38	3	2900	\N	\N
+77	38	1	2999	\N	\N
+78	39	1	2999	\N	\N
+79	39	5	9900	\N	\N
+80	40	1	2999	\N	\N
+81	40	2	2595	\N	\N
+82	40	3	2900	\N	\N
+83	40	1	2999	\N	\N
+84	41	1	2999	\N	\N
+85	42	2	2595	\N	\N
+86	42	4	999	\N	\N
+87	43	1	2999	\N	\N
+88	44	1	2999	\N	\N
+89	45	2	2595	\N	\N
+90	45	2	2595	\N	\N
+91	45	3	2900	\N	\N
+92	46	1	2999	\N	\N
+93	45	3	2900	\N	\N
+94	47	1	2999	\N	\N
+95	47	1	2999	\N	\N
+96	48	5	9900	\N	\N
+97	48	5	9900	\N	\N
+98	49	1	2999	\N	\N
+99	50	1	2999	\N	\N
+100	50	2	2595	\N	\N
+101	50	1	2999	\N	\N
+188	59	3	299	\N	\N
+106	51	3	2900	\N	\N
+107	52	1	2999	\N	\N
+108	52	2	2595	\N	\N
+109	53	4	999	\N	\N
+110	53	6	830	\N	\N
+111	53	5	9900	\N	\N
+376	77	1	299	5	1495
+194	60	7	399	\N	\N
+195	60	7	399	\N	\N
+196	60	2	299	\N	\N
+197	61	2	299	\N	\N
+374	77	2	299	2	598
+375	77	4	399	2	798
+305	65	3	299	2	598
+306	65	4	399	2	798
+206	62	5	399	\N	\N
+207	62	15	599	\N	\N
+307	65	3	299	1	299
+308	65	3	299	1	299
+309	65	2	299	1	299
+310	65	4	399	1	399
+311	66	2	299	2	598
+312	66	2	299	1	299
+313	67	4	399	1	399
+314	68	5	399	1	399
+315	69	4	399	2	798
+316	70	4	399	2	798
+317	71	4	399	1	399
+295	63	5	399	2	798
+296	63	7	399	3	1197
+318	72	4	399	1	399
+294	63	2	299	1	299
+319	72	4	399	1	399
+297	64	5	399	5	1995
+171	55	14	599	\N	\N
+172	56	2	299	\N	\N
+173	57	3	299	\N	\N
+174	57	3	299	\N	\N
+175	58	3	299	\N	\N
+304	65	8	399	3	1197
+333	73	3	299	2	598
+334	74	4	399	1	399
+335	75	4	399	2	798
+336	76	2	299	1	299
 \.
 
 
@@ -407,6 +451,25 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 56	2020-03-16 02:46:01.286233+00
 57	2020-03-16 16:34:23.573798+00
 58	2020-04-06 18:35:32.430236+00
+59	2020-04-07 23:15:38.234155+00
+60	2020-04-08 17:03:46.501957+00
+61	2020-04-08 18:26:29.180252+00
+62	2020-04-08 18:31:13.867771+00
+63	2020-04-10 17:13:09.683499+00
+64	2020-04-12 05:05:54.628881+00
+65	2020-04-13 01:21:09.179326+00
+66	2020-04-13 17:41:58.080988+00
+67	2020-04-13 19:06:43.18739+00
+68	2020-04-13 19:40:42.470061+00
+69	2020-04-13 20:11:20.628592+00
+70	2020-04-13 21:17:56.627146+00
+71	2020-04-13 21:23:42.778012+00
+72	2020-04-14 00:24:53.343886+00
+73	2020-04-14 17:13:51.999363+00
+74	2020-04-14 18:41:01.282545+00
+75	2020-04-14 18:45:53.431953+00
+76	2020-04-14 18:49:19.912618+00
+77	2020-04-14 18:52:06.574047+00
 \.
 
 
@@ -414,12 +477,25 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", "createdAt") FROM stdin;
-1	27	Dae	1	1234 Hello	2020-03-11 17:58:17.316352+00
-2	28	Dae	1	1234 Hello World	2020-03-11 18:07:37.128691+00
-3	34	Dae Kim	0987	Daes address	2020-03-11 21:53:44.589891+00
-4	35	Tim Davis	123456	Tims House	2020-03-11 21:55:28.180191+00
-5	38	Jinho	1234	1234 Ave	2020-03-12 05:06:30.9697+00
+COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", "createdAt", email, phonenumber, city, state, zip, expiremonth, expireyear, cvv) FROM stdin;
+1	27	Dae	1	1234 Hello	2020-03-11 17:58:17.316352+00	\N	\N	\N	\N	\N	\N	\N	\N
+2	28	Dae	1	1234 Hello World	2020-03-11 18:07:37.128691+00	\N	\N	\N	\N	\N	\N	\N	\N
+3	34	Dae Kim	0987	Daes address	2020-03-11 21:53:44.589891+00	\N	\N	\N	\N	\N	\N	\N	\N
+4	35	Tim Davis	123456	Tims House	2020-03-11 21:55:28.180191+00	\N	\N	\N	\N	\N	\N	\N	\N
+5	38	Jinho	1234	1234 Ave	2020-03-12 05:06:30.9697+00	\N	\N	\N	\N	\N	\N	\N	\N
+6	60	Sienna	1234567897	hello ave	2020-04-08 18:07:23.386828+00	\N	\N	\N	\N	\N	\N	\N	\N
+7	61	Kevin	808080	1234 fat ave	2020-04-08 18:30:19.193523+00	\N	\N	\N	\N	\N	\N	\N	\N
+8	66	Dae Kim	1658168188646815	2144 West 182nd Street\n2	2020-04-13 19:04:59.936717+00	\N	\N	\N	\N	\N	\N	\N	\N
+9	67	Dae Kim	1981918911919819	73 Cascade\n73	2020-04-13 19:40:39.262334+00	\N	\N	\N	\N	\N	\N	\N	\N
+10	68	Sienna Serrano	1560198181909819	hello blvd	2020-04-13 20:10:58.918512+00	Imabutthole@gmail.com	1234567890	walnut	ca	91789	10	22	5411
+11	69	Jong Kim	1854981816518681	test address 	2020-04-13 21:17:32.959094+00	heloo@gmail.com	2132161554	torrance	CA	90504	2	2022	541
+12	70	Dae H Kim	5161616518168168	2144 West 182nd Street\n2	2020-04-13 21:22:40.668373+00	daehk4@uci.edu	3106346150	Torrance	CA	90504	3	2022	5415
+13	71	Dae H Kim	5375345345345345	2144 West 182nd Street\n2	2020-04-14 00:24:49.096173+00	daehk4@uci.edu	3106346150	Torrance	CA	90504	3	2022	4534
+14	72	Dae H Kim	1717817187187187	2144 West 182nd Street\n2	2020-04-14 01:09:12.658705+00	daehk4@uci.edu	3106346150	Torrance	CA	90504	3	2023	5466
+15	73	Jong Kim	2318961818618616	24312 41234 sfasdf	2020-04-14 18:40:36.254268+00	kim1584@yahoo.com	2132161554	Torrance	CA	90504	4	2022	5433
+16	74	Dae H Kim	4534534534534534	2144 West 182nd Street\n2	2020-04-14 18:43:57.989894+00	daehk4@uci.edu	3106346150	Torrance	CA	90504	2	2022	4345
+17	75	Dae H Kim	3737537537537537	2144 West 182nd Street\n2	2020-04-14 18:48:00.748538+00	daehk4@uci.edu	3106346150	Torrance	CA	90504	2	2022	7537
+18	76	Dae H Kim	2341234214352354	2144 West 182nd Street\n2	2020-04-14 18:52:01.590185+00	daehk4@uci.edu	3106346150	Torrance	CA	90504	2	2021	2345
 \.
 
 
@@ -451,21 +527,21 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 175, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 376, true);
 
 
 --
 -- Name: carts_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."carts_cartId_seq"', 58, true);
+SELECT pg_catalog.setval('public."carts_cartId_seq"', 77, true);
 
 
 --
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 5, true);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 18, true);
 
 
 --

@@ -84,6 +84,26 @@ app.get('/api/cart', (req, res, next) => {
   }
 });
 
+app.put('/api/cart', (req, res, next) => {
+  const cartId = req.session.cartId;
+  const productId = req.body.productId;
+  const newQuantity = req.body.newQuantity;
+  const newTotalPrice = req.body.newTotalPrice;
+  const sql = `
+  UPDATE "cartItems"
+  SET "quantity" = $1,
+      "totalprice" = $2
+  WHERE "cartId" = $3 AND "productId" = $4
+  RETURNING *
+  `;
+
+  db.query(sql, [newQuantity, newTotalPrice, cartId, productId])
+    .then(result => {
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/cart', (req, res, next) => {
   const productId = req.body.productId;
   const sql = `

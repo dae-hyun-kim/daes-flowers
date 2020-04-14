@@ -119,27 +119,62 @@ export default class App extends React.Component {
   }
 
   addToCart(product, quantity) {
+    event.preventDefault();
     const productQuantity = {
       quantity: quantity
     };
-
+    let duplicate = false;
+    const cart = this.state.cart;
+    const theProductId = product.productId;
     const theProductWithQuantity = { ...product, ...productQuantity };
-    event.preventDefault();
-    fetch('/api/cart', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(theProductWithQuantity)
-    }).then(response => {
-      return (response.json());
-    }).then(result => {
-      const addItemToCart = this.state.cart.concat(result);
-      this.setState({
-        cart: addItemToCart,
-        cartQuantity: this.state.cartQuantity + result.quantity
+    let duplicateQuantity = null;
+    let newTotalPrice = null;
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].productId === theProductId) {
+        duplicate = true;
+        duplicateQuantity = cart[i].quantity + quantity;
+        const additonalTotal = product.price * quantity;
+        newTotalPrice = cart[i].totalprice + additonalTotal;
+        const duplicateProduct = {
+          productId: theProductId,
+          newQuantity: duplicateQuantity,
+          newTotalPrice: newTotalPrice
+        };
+        fetch('/api/cart', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(duplicateProduct)
+        }).then(response => {
+          return (response.json());
+        }).then(result => {
+          cart[i] = { ...cart[i], ...result };
+          this.setState({
+            cart,
+            cartQuantity: this.state.cartQuantity + result.quantity
+          });
+        });
+      }
+    }
+
+    if (duplicate === false) {
+      fetch('/api/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(theProductWithQuantity)
+      }).then(response => {
+        return (response.json());
+      }).then(result => {
+        const addItemToCart = this.state.cart.concat(result);
+        this.setState({
+          cart: addItemToCart,
+          cartQuantity: this.state.cartQuantity + result.quantity
+        });
       });
-    });
+    }
   }
 
   removeFromCart(cartItemId) {
