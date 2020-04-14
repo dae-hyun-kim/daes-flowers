@@ -5,16 +5,23 @@ export default class CartSummaryItem extends React.Component {
     super(props);
     this.state = {
       quantity: this.props.item ? this.props.item.quantity : '',
-      update: false
+      update: false,
+      remove: false
     };
     this.removeFromCart = this.removeFromCart.bind(this);
     this.decrementHandler = this.decrementHandler.bind(this);
     this.incrementHandler = this.incrementHandler.bind(this);
+    this.showRemoveModal = this.showRemoveModal.bind(this);
+    this.removeItemFromCartModal = this.removeItemFromCartModal.bind(this);
+    this.hideRemoveModal = this.hideRemoveModal.bind(this);
   }
 
   removeFromCart(event) {
     const cartItemId = event.currentTarget.id;
     const removeCartItemMethod = this.props.removeFromCart;
+    this.setState({
+      remove: false
+    });
     removeCartItemMethod(cartItemId);
   }
 
@@ -62,6 +69,44 @@ export default class CartSummaryItem extends React.Component {
     }
   }
 
+  showRemoveModal(event) {
+    event.preventDefault();
+    this.setState({
+      remove: true
+    });
+  }
+
+  hideRemoveModal(event) {
+    event.preventDefault();
+    this.setState({
+      remove: false
+    });
+  }
+
+  removeItemFromCartModal() {
+    const theItem = this.props.item;
+    if (this.state.remove === true) {
+      return (
+        <div className="confirm-remove-modal">
+          <div className="continue-shopping-modal-inner text-center">
+            <div className="mt-2">
+              <h3>Are You Sure?</h3>
+            </div>
+            <div className="mt-3">
+              <h5>Do you want to remove this from your cart?</h5>
+              <h5>Item: {theItem.name}</h5>
+              <h5>Qty: {this.state.quantity}</h5>
+            </div>
+            <div className="d-flex justify-content-around mt-4">
+              <button onClick={this.hideRemoveModal} className="btn btn-pink keep-in-cart">Keep in cart</button>
+              <button onClick={this.removeFromCart} id={this.props.item.cartItemId} className="btn btn-danger font-styling btn-sm remove">Remove</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
   componentDidUpdate() {
     if (this.state.update === true) {
       this.setState({
@@ -77,6 +122,7 @@ export default class CartSummaryItem extends React.Component {
     const priceReformat = (theItem.totalprice / 100).toFixed(2);
     return (
       <div className="d-flex justify-content-around cart-item-container col-10 cart-item-border">
+        {this.removeItemFromCartModal()}
         <div className="col-5 cart-summary-image-container">
           <img src={theItem.image} alt="" className="cart-summary-img-styling"/>
         </div>
@@ -95,7 +141,7 @@ export default class CartSummaryItem extends React.Component {
                   <i className="fas fa-plus"></i>
                 </div>
               </div>
-              <button onClick={this.removeFromCart} id={this.props.item.cartItemId} className="btn btn-danger btn-sm font-styling remove">Remove</button>
+              <button onClick={this.showRemoveModal} className="btn btn-danger btn-sm font-styling remove">Remove</button>
             </div>
           </div>
         </div>
