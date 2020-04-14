@@ -138,8 +138,12 @@ export default class CheckoutForm extends React.Component {
       this.setState({
         checkbox: true
       });
-    } else {
+    } else if (this.state.checkbox === null) {
       this.setState({
+        checkbox: true
+      });
+    } else {
+      this.state({
         checkbox: false
       });
     }

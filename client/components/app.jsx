@@ -180,7 +180,8 @@ export default class App extends React.Component {
         view: {
           name: 'thank-you',
           params: {}
-        }
+        },
+        cartQuantity: ''
       });
     });
   }
