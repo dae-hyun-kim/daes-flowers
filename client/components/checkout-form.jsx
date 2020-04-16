@@ -45,22 +45,67 @@ export default class CheckoutForm extends React.Component {
     this.handleExpireYear = this.handleExpireYear.bind(this);
     this.handleCVV = this.handleCVV.bind(this);
     this.handleCheckBox = this.handleCheckBox.bind(this);
+    this.nameBlurHandler = this.nameBlurHandler.bind(this);
+    this.emailBlurHandler = this.emailBlurHandler.bind(this);
+    this.numberBlurHandler = this.numberBlurHandler.bind(this);
+    this.shippingAddressBlurHandler = this.shippingAddressBlurHandler.bind(this);
+    this.shippingCityBlurHandler = this.shippingCityBlurHandler.bind(this);
+    this.shippingStateBlurHandler = this.shippingStateBlurHandler.bind(this);
+    this.shippingZipBlurHandler = this.shippingZipBlurHandler.bind(this);
+    this.creditCardBlurHandler = this.creditCardBlurHandler.bind(this);
+    this.expireMonthBlurHandler = this.expireMonthBlurHandler.bind(this);
+    this.expireYearBlurHandler = this.expireYearBlurHandler.bind(this);
   }
 
   handleName(event) {
+    const validationCheck = this.state.formValidation;
+    validationCheck.name = true;
     this.setState({
-      name: event.currentTarget.value
+      name: event.currentTarget.value,
+      formValidation: validationCheck
     });
   }
 
+  nameBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    if (this.state.name.length > 65 || this.state.name.length < 5) {
+      validationCheck.name = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.name = true;
+      this.setState({
+        formValidation: validationCheck
+      });
+    }
+  }
+
   handleEmail(event) {
+    const validationCheck = this.state.formValidation;
+    validationCheck.email = true;
     this.setState({
       email: event.currentTarget.value
     });
   }
 
+  emailBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    if (emailRegex.test(this.state.email) === false) {
+      validationCheck.email = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.email = true;
+    }
+  }
+
   handlePhoneNumber(event) {
     const numRegex = RegExp(/^[0-9]*$/);
+    const validationCheck = this.state.formValidation;
+    validationCheck.phonenumber = true;
     if (numRegex.test(event.currentTarget.value) === false) {
       return null;
     } else {
@@ -70,26 +115,82 @@ export default class CheckoutForm extends React.Component {
     }
   }
 
+  numberBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    if (this.state.phonenumber.length !== 10) {
+      validationCheck.phonenumber = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.phonenumber = true;
+    }
+  }
+
   handleShippingAddress(event) {
+    const validationCheck = this.state.formValidation;
+    validationCheck.shippingAddress = true;
     this.setState({
       shippingAddress: event.currentTarget.value
     });
   }
 
+  shippingAddressBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    if (this.state.shippingAddress.length < 5) {
+      validationCheck.shippingAddress = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.shippingAddress = true;
+    }
+  }
+
   handleShippingCity(event) {
+    const validationCheck = this.state.formValidation;
+    validationCheck.shippingCity = true;
     this.setState({
       shippingCity: event.currentTarget.value
     });
   }
 
+  shippingCityBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    if (this.state.shippingCity.length < 3 || this.state.shippingCity.length > 50) {
+      validationCheck.shippingCity = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.shippingCity = true;
+    }
+  }
+
   handleShippingState(event) {
+    const validationCheck = this.state.formValidation;
+    validationCheck.shippingState = true;
     this.setState({
       shippingState: event.currentTarget.value
     });
   }
 
+  shippingStateBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    if (!this.state.shippingState) {
+      validationCheck.shippingState = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.shippingState = true;
+    }
+  }
+
   handleShippingZip(event) {
     const numRegex = RegExp(/^[0-9]*$/);
+    const validationCheck = this.state.formValidation;
+    validationCheck.shippingZip = true;
     if (numRegex.test(event.currentTarget.value) === false) {
       return null;
     } else {
@@ -99,8 +200,22 @@ export default class CheckoutForm extends React.Component {
     }
   }
 
+  shippingZipBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    if (this.state.shippingZip.length !== 5) {
+      validationCheck.shippingZip = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.shippingZip = true;
+    }
+  }
+
   handleCreditCard(event) {
     const numRegex = RegExp(/^[0-9]*$/);
+    const validationCheck = this.state.formValidation;
+    validationCheck.creditCard = true;
     if (numRegex.test(event.currentTarget.value) === false) {
       return null;
     } else {
@@ -110,26 +225,80 @@ export default class CheckoutForm extends React.Component {
     }
   }
 
+  creditCardBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    if (this.state.creditCard.length < 16) {
+      validationCheck.creditCard = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.creditCard = true;
+    }
+  }
+
   handleExpireMonth(event) {
+    const validationCheck = this.state.formValidation;
+    validationCheck.expiremonth = true;
     this.setState({
       expiremonth: event.currentTarget.value
     });
   }
 
+  expireMonthBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    if (!this.state.expiremonth) {
+      validationCheck.expiremonth = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.expiremonth = true;
+    }
+  }
+
   handleExpireYear(event) {
+    const validationCheck = this.state.formValidation;
+    validationCheck.expireyear = true;
     this.setState({
       expireyear: event.currentTarget.value
     });
   }
 
+  expireYearBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    if (!this.state.expireyear) {
+      validationCheck.expireyear = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.expireyear = true;
+    }
+  }
+
   handleCVV(event) {
     const numRegex = RegExp(/^[0-9]*$/);
+    const validationCheck = this.state.formValidation;
+    validationCheck.cvv = true;
     if (numRegex.test(event.currentTarget.value) === false) {
       return null;
     } else {
       this.setState({
         cvv: event.currentTarget.value
       });
+    }
+  }
+
+  cvvBlurHandler() {
+    const validationCheck = this.state.formValidation;
+    if (this.state.cvv.length < 3 || this.state.cvv.length > 4) {
+      validationCheck.cvv = false;
+      this.setState({
+        formValidation: validationCheck
+      });
+    } else {
+      validationCheck.cvv = true;
     }
   }
 
@@ -143,7 +312,7 @@ export default class CheckoutForm extends React.Component {
         checkbox: true
       });
     } else {
-      this.state({
+      this.setState({
         checkbox: false
       });
     }
@@ -153,6 +322,7 @@ export default class CheckoutForm extends React.Component {
     event.preventDefault();
     const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     const validationCheck = this.state.formValidation;
+
     if (this.state.name.length > 65 || this.state.name.length < 5) {
       validationCheck.name = false;
       this.setState({
@@ -329,7 +499,7 @@ export default class CheckoutForm extends React.Component {
               <div>
                 <label htmlFor="name" className="checkout">
                   <h5>Full Name:</h5>
-                  <input htmlFor="name" type="text" onChange={this.handleName} value={this.state.name} className="checkout-inputs form-inputs w-100" minLength="5" maxLength="65"/>
+                  <input htmlFor="name" type="text" onChange={this.handleName} value={this.state.name} className="checkout-inputs form-inputs w-100" minLength="5" maxLength="65" onBlur={this.nameBlurHandler}/>
                   {this.state.formValidation.name === false ? <p className="form-error">Please Enter Full Name - Must be at least 5 letters</p> : null}
                 </label>
               </div>
@@ -337,13 +507,13 @@ export default class CheckoutForm extends React.Component {
               <div className="d-flex justify-content-between flex-wrap">
                 <label htmlFor="email" className="email-input">
                   <h5>Email:</h5>
-                  <input htmlFor="email" type="email" onChange={this.handleEmail} value={this.state.email} minLength="6" maxLength="254" className="checkout-inputs form-inputs w-100"/>
+                  <input htmlFor="email" type="email" onChange={this.handleEmail} value={this.state.email} minLength="6" maxLength="254" className="checkout-inputs form-inputs w-100" onBlur={this.emailBlurHandler}/>
                   {this.state.formValidation.email === false ? <p className="form-error">Please Enter a Valid Email</p> : null}
                 </label>
 
                 <label htmlFor="phone">
                   <h5>Phone Number:</h5>
-                  <input htmlFor="phone" type="tel" onChange={this.handlePhoneNumber} value={this.state.phonenumber} minLength="10" maxLength="10" className="checkout-inputs form-inputs w-100"/>
+                  <input htmlFor="phone" type="tel" onChange={this.handlePhoneNumber} value={this.state.phonenumber} minLength="10" maxLength="10" className="checkout-inputs form-inputs w-100" onBlur={this.numberBlurHandler}/>
                   {this.state.formValidation.phonenumber === false ? <p className="form-error">Please Enter a Valid Phone Number</p> : null}
                 </label>
               </div>
@@ -351,7 +521,7 @@ export default class CheckoutForm extends React.Component {
               <div>
                 <label htmlFor="address" className="checkout">
                   <h5>Shipping Address:</h5>
-                  <textarea htmlFor="shippingAddress" name="address" id="address" onChange={this.handleShippingAddress} value={this.state.shippingAddress} className="checkout-inputs form-inputs w-100"></textarea>
+                  <textarea htmlFor="shippingAddress" name="address" id="address" onChange={this.handleShippingAddress} value={this.state.shippingAddress} className="checkout-inputs form-inputs w-100" onBlur={this.shippingAddressBlurHandler}></textarea>
                 </label>
                 {this.state.formValidation.shippingAddress === false ? <p className="form-error">Please Enter a Valid Shipping Address</p> : null}
               </div>
@@ -359,13 +529,13 @@ export default class CheckoutForm extends React.Component {
               <div className="d-flex justify-content-between flex-wrap">
                 <label htmlFor="city" className="city-input">
                   <h5>City:</h5>
-                  <input htmlFor="city" type="text" onChange={this.handleShippingCity} value={this.state.shippingCity} minLength="3" maxLength="50" className="checkout-inputs form-inputs w-100"/>
+                  <input htmlFor="city" type="text" onChange={this.handleShippingCity} value={this.state.shippingCity} minLength="3" maxLength="50" className="checkout-inputs form-inputs w-100" onBlur={this.shippingCityBlurHandler}/>
                   {this.state.formValidation.shippingCity === false ? <p className="form-error">Please Enter a Valid City</p> : null}
                 </label>
 
                 <label htmlFor="state" className="state-label">
                   <h5>State:</h5>
-                  <select htmlFor="state" type="text" onChange={this.handleShippingState} value={this.state.shippingState} className="checkout-inputs form-inputs">
+                  <select htmlFor="state" type="text" onChange={this.handleShippingState} value={this.state.shippingState} className="checkout-inputs form-inputs" onBlur={this.shippingStateBlurHandler}>
                     <option defaultValue hidden></option>
                     <option value="AL">AL</option>
                     <option value="AK">AK</option>
@@ -424,7 +594,7 @@ export default class CheckoutForm extends React.Component {
 
                 <label htmlFor="zip" className="zip-input">
                   <h5>Zip</h5>
-                  <input htmlFor="zip" type="tel" onChange={this.handleShippingZip} value={this.state.shippingZip} minLength="5" maxLength="5" className="checkout-inputs form-inputs w-100"/>
+                  <input htmlFor="zip" type="tel" onChange={this.handleShippingZip} value={this.state.shippingZip} minLength="5" maxLength="5" className="checkout-inputs form-inputs w-100" onBlur={this.shippingZipBlurHandler}/>
                   {this.state.formValidation.shippingZip === false ? <p className="form-error">Please Enter a Valid Zip Code</p> : null}
                 </label>
               </div>
@@ -432,7 +602,7 @@ export default class CheckoutForm extends React.Component {
               <div>
                 <label htmlFor="creditCard" className="checkout">
                   <h5>Credit Card:</h5>
-                  <input htmlFor="creditCard" type="tel" onChange={this.handleCreditCard} value={this.state.creditCard} className="checkout-inputs form-inputs w-100" minLength="16" maxLength="16"/>
+                  <input htmlFor="creditCard" type="tel" onChange={this.handleCreditCard} value={this.state.creditCard} className="checkout-inputs form-inputs w-100" minLength="16" maxLength="16" onBlur={this.creditCardBlurHandler}/>
                   {this.state.formValidation.creditCard === false ? <p className="form-error">Please Enter a Valid Credit Card Number</p> : null}
                 </label>
               </div>
@@ -440,7 +610,7 @@ export default class CheckoutForm extends React.Component {
               <div className="d-flex justify-content-between flex-wrap">
                 <label htmlFor="ccmonth">
                   <h5>Month:</h5>
-                  <select htmlFor="ccmonth" type="number" onChange={this.handleExpireMonth} value={this.state.expiremonth} className="checkout-inputs form-inputs">
+                  <select htmlFor="ccmonth" type="number" onChange={this.handleExpireMonth} value={this.state.expiremonth} className="checkout-inputs form-inputs" onBlur={this.expireMonthBlurHandler}>
                     <option defaultValue hidden></option>
                     <option value="01">01</option>
                     <option value="02">02</option>
@@ -460,7 +630,7 @@ export default class CheckoutForm extends React.Component {
 
                 <label htmlFor="ccyear">
                   <h5>Year:</h5>
-                  <select htmlFor="ccyear" type="number" onChange={this.handleExpireYear} value={this.state.expireyear} className="checkout-inputs form-inputs ">
+                  <select htmlFor="ccyear" type="number" onChange={this.handleExpireYear} value={this.state.expireyear} className="checkout-inputs form-inputs" onBlur={this.expireYearBlurHandler}>
                     <option defaultValue hidden></option>
                     <option value="2020">2020</option>
                     <option value="2021">2021</option>
