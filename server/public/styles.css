@@ -159,6 +159,11 @@ body {
   border-radius: 50%;
 }
 
+.openCircle:hover, .closedCircle:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 .closedCircle {
   margin: 3px;
   height: 12px;
