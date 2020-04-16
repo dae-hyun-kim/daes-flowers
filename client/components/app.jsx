@@ -151,9 +151,10 @@ export default class App extends React.Component {
           return (response.json());
         }).then(result => {
           cart[i] = { ...cart[i], ...result };
+          const oldQuantity = this.state.cartQuantity;
           this.setState({
             cart,
-            cartQuantity: this.state.cartQuantity + result.quantity,
+            cartQuantity: this.state.cartQuantity - oldQuantity + result.quantity,
             dim: false
           });
         });
