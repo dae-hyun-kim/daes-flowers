@@ -424,6 +424,11 @@ body {
   pointer-events: none;
 }
 
+.spacing {
+  width: 1px;
+  height: 30px;
+}
+
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -577,6 +582,16 @@ and (max-device-width: 500px) {
   margin-left: -175px;
   z-index: 1000;
 }
+
+.spacing {
+  width: 1px;
+  height: 40px;
+}
+
+.card-info-expires {
+  width: 100%;
+}
+
 }
 
 @media only screen
@@ -740,6 +755,24 @@ and (max-device-width: 750px) {
   .checkout-container {
     height: 1625px;
   }
+
+  .city-input {
+    width: 100%;
+  }
+
+  .cvv-input {
+    width: 100%;
+  }
+
+  .spacing {
+  width: 1px;
+  height: 35px;
+}
+
+.thank-you-button-margin {
+  margin-bottom: 150px;
+}
+
 }
 
 @media only screen
@@ -899,6 +932,10 @@ and (max-device-width: 950px) {
 
   .checkout-container {
     height: 1500px;
+  }
+
+  .city-input {
+    width: 100%;
   }
 }
 

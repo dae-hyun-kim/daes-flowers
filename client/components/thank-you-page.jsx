@@ -20,7 +20,7 @@ export default class ThankYouPage extends React.Component {
           <h2>Your Order has been placed</h2>
           <p className="contact-text">Please check your email for confirmation. If anything looks wrong, or there is a problem with your order, please reach out to us.</p>
         </div>
-        <div className="mt-5 text-center">
+        <div className="mt-5 text-center thank-you-button-margin">
           <button onClick={this.changeToCatalog} className="btn btn-pink thank-you-button">Continue Shopping</button>
         </div>
       </div>

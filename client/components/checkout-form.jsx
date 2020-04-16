@@ -500,7 +500,7 @@ export default class CheckoutForm extends React.Component {
                 <label htmlFor="name" className="checkout">
                   <h5>Full Name:</h5>
                   <input htmlFor="name" type="text" onChange={this.handleName} value={this.state.name} className="checkout-inputs form-inputs w-100" minLength="5" maxLength="65" onBlur={this.nameBlurHandler}/>
-                  {this.state.formValidation.name === false ? <p className="form-error">Please Enter Full Name - Must be at least 5 letters</p> : null}
+                  {this.state.formValidation.name === false ? <p className="form-error">Please Enter Full Name - Must be at least 5 letters</p> : <div className="spacing"></div>}
                 </label>
               </div>
 
@@ -508,13 +508,13 @@ export default class CheckoutForm extends React.Component {
                 <label htmlFor="email" className="email-input">
                   <h5>Email:</h5>
                   <input htmlFor="email" type="email" onChange={this.handleEmail} value={this.state.email} minLength="6" maxLength="254" className="checkout-inputs form-inputs w-100" onBlur={this.emailBlurHandler}/>
-                  {this.state.formValidation.email === false ? <p className="form-error">Please Enter a Valid Email</p> : null}
+                  {this.state.formValidation.email === false ? <p className="form-error">Please Enter a Valid Email</p> : <div className="spacing"></div>}
                 </label>
 
                 <label htmlFor="phone">
                   <h5>Phone Number:</h5>
                   <input htmlFor="phone" type="tel" onChange={this.handlePhoneNumber} value={this.state.phonenumber} minLength="10" maxLength="10" className="checkout-inputs form-inputs w-100" onBlur={this.numberBlurHandler}/>
-                  {this.state.formValidation.phonenumber === false ? <p className="form-error">Please Enter a Valid Phone Number</p> : null}
+                  {this.state.formValidation.phonenumber === false ? <p className="form-error">Please Enter a Valid Phone Number</p> : <div className="spacing"></div>}
                 </label>
               </div>
 
@@ -523,14 +523,14 @@ export default class CheckoutForm extends React.Component {
                   <h5>Shipping Address:</h5>
                   <textarea htmlFor="shippingAddress" name="address" id="address" onChange={this.handleShippingAddress} value={this.state.shippingAddress} className="checkout-inputs form-inputs w-100" onBlur={this.shippingAddressBlurHandler}></textarea>
                 </label>
-                {this.state.formValidation.shippingAddress === false ? <p className="form-error">Please Enter a Valid Shipping Address</p> : null}
+                {this.state.formValidation.shippingAddress === false ? <p className="form-error">Please Enter a Valid Shipping Address</p> : <div className="spacing"></div>}
               </div>
 
               <div className="d-flex justify-content-between flex-wrap">
                 <label htmlFor="city" className="city-input">
                   <h5>City:</h5>
                   <input htmlFor="city" type="text" onChange={this.handleShippingCity} value={this.state.shippingCity} minLength="3" maxLength="50" className="checkout-inputs form-inputs w-100" onBlur={this.shippingCityBlurHandler}/>
-                  {this.state.formValidation.shippingCity === false ? <p className="form-error">Please Enter a Valid City</p> : null}
+                  {this.state.formValidation.shippingCity === false ? <p className="form-error">Please Enter a Valid City</p> : <div className="spacing"></div>}
                 </label>
 
                 <label htmlFor="state" className="state-label">
@@ -589,13 +589,13 @@ export default class CheckoutForm extends React.Component {
                     <option value="WI">WI</option>
                     <option value="WY">WY</option>
                   </select>
-                  {this.state.formValidation.shippingState === false ? <p className="form-error">Please Select a State</p> : null}
+                  {this.state.formValidation.shippingState === false ? <p className="form-error">Please Select a State</p> : <div className="spacing"></div>}
                 </label>
 
                 <label htmlFor="zip" className="zip-input">
                   <h5>Zip</h5>
                   <input htmlFor="zip" type="tel" onChange={this.handleShippingZip} value={this.state.shippingZip} minLength="5" maxLength="5" className="checkout-inputs form-inputs w-100" onBlur={this.shippingZipBlurHandler}/>
-                  {this.state.formValidation.shippingZip === false ? <p className="form-error">Please Enter a Valid Zip Code</p> : null}
+                  {this.state.formValidation.shippingZip === false ? <p className="form-error">Please Enter a Valid Zip</p> : <div className="spacing"></div>}
                 </label>
               </div>
 
@@ -603,12 +603,12 @@ export default class CheckoutForm extends React.Component {
                 <label htmlFor="creditCard" className="checkout">
                   <h5>Credit Card:</h5>
                   <input htmlFor="creditCard" type="tel" onChange={this.handleCreditCard} value={this.state.creditCard} className="checkout-inputs form-inputs w-100" minLength="16" maxLength="16" onBlur={this.creditCardBlurHandler}/>
-                  {this.state.formValidation.creditCard === false ? <p className="form-error">Please Enter a Valid Credit Card Number</p> : null}
+                  {this.state.formValidation.creditCard === false ? <p className="form-error">Please Enter a Valid Credit Card Number</p> : <div className="spacing"></div>}
                 </label>
               </div>
 
               <div className="d-flex justify-content-between flex-wrap">
-                <label htmlFor="ccmonth">
+                <label htmlFor="ccmonth" className="card-info-expires">
                   <h5>Month:</h5>
                   <select htmlFor="ccmonth" type="number" onChange={this.handleExpireMonth} value={this.state.expiremonth} className="checkout-inputs form-inputs" onBlur={this.expireMonthBlurHandler}>
                     <option defaultValue hidden></option>
@@ -625,10 +625,10 @@ export default class CheckoutForm extends React.Component {
                     <option value="11">11</option>
                     <option value="12">12</option>
                   </select>
-                  {this.state.formValidation.expiremonth === false ? <p className="form-error">Invalid Expiration Month</p> : null}
+                  {this.state.formValidation.expiremonth === false ? <p className="form-error">Invalid Expiration Month</p> : <div className="spacing"></div>}
                 </label>
 
-                <label htmlFor="ccyear">
+                <label htmlFor="ccyear" className="card-info-expires">
                   <h5>Year:</h5>
                   <select htmlFor="ccyear" type="number" onChange={this.handleExpireYear} value={this.state.expireyear} className="checkout-inputs form-inputs" onBlur={this.expireYearBlurHandler}>
                     <option defaultValue hidden></option>
@@ -643,20 +643,20 @@ export default class CheckoutForm extends React.Component {
                     <option value="2028">2028</option>
                     <option value="2029">2029</option>
                   </select>
-                  {this.state.formValidation.expireyear === false ? <p className="form-error">Invalid Expiration Year</p> : null}
+                  {this.state.formValidation.expireyear === false ? <p className="form-error">Invalid Expiration Year</p> : <div className="spacing"></div>}
                 </label>
 
-                <label htmlFor="cvv" className="cvv-input">
+                <label htmlFor="cvv" className="cvv-input card-info-expires">
                   <h5>CVV:</h5>
-                  <input htmlFor="cvv" type="tel" onChange={this.handleCVV} value={this.state.cvv} minLength="3" maxLength="4" className="checkout-inputs form-inputs w-100"/>
-                  {this.state.formValidation.cvv === false ? <p className="form-error">Invalid CVV</p> : null}
+                  <input htmlFor="cvv" type="tel" onChange={this.handleCVV} value={this.state.cvv} minLength="3" maxLength="4" className="checkout-inputs form-inputs w-50"/>
+                  {this.state.formValidation.cvv === false ? <p className="form-error">Invalid CVV</p> : <div className="spacing"></div>}
                 </label>
               </div>
               <div className="mt-2">
                 <label htmlFor="checkbox">
                   <div><input type="checkbox" className="mr-1" onClick={this.handleCheckBox}/>I accept that this website is for demonstration purposes only and no real purchases will be made. No real personal information should
                   be used in the submission of this form.</div>
-                  {this.state.checkbox === false ? <p className="form-error">Terms are required for checkout</p> : null}
+                  {this.state.checkbox === false ? <p className="form-error">Terms are required for checkout</p> : <div className="spacing"></div>}
                 </label>
               </div>
 
