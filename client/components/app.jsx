@@ -22,7 +22,8 @@ export default class App extends React.Component {
       },
       cart: [],
       cartQuantity: '',
-      introModal: true
+      introModal: true,
+      dim: true
     };
     this.setView = this.setView.bind(this);
     this.productViewChoice = this.productViewChoice.bind(this);
@@ -152,7 +153,8 @@ export default class App extends React.Component {
           cart[i] = { ...cart[i], ...result };
           this.setState({
             cart,
-            cartQuantity: this.state.cartQuantity + result.quantity
+            cartQuantity: this.state.cartQuantity + result.quantity,
+            dim: false
           });
         });
       }
@@ -194,7 +196,8 @@ export default class App extends React.Component {
         }, 0);
         this.setState({
           cart: newCart,
-          cartQuantity: totalQuantity
+          cartQuantity: totalQuantity,
+          dim: false
         });
       });
   }
@@ -223,7 +226,8 @@ export default class App extends React.Component {
 
   turnOffIntroModal() {
     this.setState({
-      introModal: false
+      introModal: false,
+      dim: false
     });
   }
 
@@ -235,23 +239,27 @@ export default class App extends React.Component {
     return (
       <div>
         {this.state.introModal === true ? <IntroModal turnOff={this.turnOffIntroModal}/> : null}
-        <div className="col-12 all">
-          <div className="header-top d-flex justify-content-center">
-            <div className="col-12 mb-3">
-              <Header cartItemCount={this.state.cart ? this.state.cartQuantity : 0} setView={this.setView} cartItemList={this.state.cart}/>
-            </div>
-          </div>
-          <div className="col-12 header-divider"></div>
-          {this.carouselView()}
-          {this.salesSectionView()}
-          <div className="container">
-            <div>
-              <div>
-                {this.productViewChoice()}
+        <div className={this.state.dim === true ? 'dim' : null}>
+          <div className="col-12 all">
+            <div className="header-top d-flex justify-content-center">
+              <div className="col-12 mb-3">
+                <Header cartItemCount={this.state.cart ? this.state.cartQuantity : 0} setView={this.setView} cartItemList={this.state.cart}/>
               </div>
             </div>
+            <div className="col-12 header-divider"></div>
+            <div>
+              {this.carouselView()}
+            </div>
+            {this.salesSectionView()}
+            <div className="container">
+              <div>
+                <div>
+                  {this.productViewChoice()}
+                </div>
+              </div>
+            </div>
+            {this.footerView()}
           </div>
-          {this.footerView()}
         </div>
       </div>
     );

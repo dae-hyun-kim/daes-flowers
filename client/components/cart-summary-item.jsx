@@ -6,7 +6,8 @@ export default class CartSummaryItem extends React.Component {
     this.state = {
       quantity: this.props.item ? this.props.item.quantity : '',
       update: false,
-      remove: false
+      remove: false,
+      dim: false
     };
     this.removeFromCart = this.removeFromCart.bind(this);
     this.decrementHandler = this.decrementHandler.bind(this);
