@@ -17,6 +17,7 @@ export default class ProductDetails extends React.Component {
     this.incrementQuantity = this.incrementQuantity.bind(this);
     this.decrementQuantity = this.decrementQuantity.bind(this);
     this.displayError = this.displayError.bind(this);
+    this.blurQuantityHandler = this.blurQuantityHandler.bind(this);
   }
 
   handleClick(event) {
@@ -47,6 +48,14 @@ export default class ProductDetails extends React.Component {
     });
   }
 
+  blurQuantityHandler() {
+    if (this.state.quantity === 0 || isNaN(this.state.quantity)) {
+      this.setState({
+        quantity: 1
+      });
+    }
+  }
+
   incrementQuantity(event) {
     let productQuantity = this.state.quantity;
     this.setState({
@@ -56,7 +65,7 @@ export default class ProductDetails extends React.Component {
 
   decrementQuantity(event) {
     let productQuantity = this.state.quantity;
-    if (productQuantity === 0) {
+    if (productQuantity === 1) {
       return (null);
     } else {
       this.setState({
@@ -111,7 +120,7 @@ export default class ProductDetails extends React.Component {
                       <div className="d-flex align-items-center justify-content-center quantity-changer" onClick={this.decrementQuantity}>
                         <i className="fas fa-minus"></i>
                       </div>
-                      <input type="number" className="text-center quantity-input" onChange={this.changeQuantityHandler} value={this.state.quantity}/>
+                      <input type="number" className="text-center quantity-input" onChange={this.changeQuantityHandler} value={this.state.quantity} onBlur={this.blurQuantityHandler}/>
                       <div className="d-flex align-items-center justify-content-center quantity-changer" onClick={this.incrementQuantity}>
                         <i className="fas fa-plus"></i>
                       </div>
