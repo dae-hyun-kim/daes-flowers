@@ -5,7 +5,7 @@ export default class CartSummary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      dim: false
     };
     this.createCartItems = this.createCartItems.bind(this);
     this.priceTotal = this.priceTotal.bind(this);
@@ -63,18 +63,20 @@ export default class CartSummary extends React.Component {
 
   render() {
     return (
-      <div className="d-flex flex-wrap justify-content-center cart-summary-container">
-        <div className="col-10 mt-3">
-          <button className="btn btn-pink" onClick={this.changeView}>Back To Catalog</button>
-          <h1 className="mt-4 font-styling text-center my-cart-heading">My Cart</h1>
-        </div>
-        <div className="d-flex justify-content-center flex-wrap">
-          {this.createCartItems()}
-        </div>
-        <div className="col-12 mt-5 mb-5">
-          <div className="checkout-box">
-            <h2 className="font-styling mt-3 mb-3">{`Item Total: $${this.priceTotal()}`}</h2>
-            {this.hideCheckoutButton()}
+      <div>
+        <div className="d-flex flex-wrap justify-content-center cart-summary-container">
+          <div className="col-10 mt-3">
+            <button className="btn btn-pink" onClick={this.changeView}>Back To Catalog</button>
+            <h1 className="mt-4 font-styling text-center my-cart-heading">My Cart</h1>
+          </div>
+          <div className="d-flex justify-content-center flex-wrap">
+            {this.createCartItems()}
+          </div>
+          <div className="col-12 mt-5 mb-5">
+            <div className="checkout-box">
+              <h2 className="font-styling mt-3 mb-3">{`Item Total: $${this.priceTotal()}`}</h2>
+              {this.hideCheckoutButton()}
+            </div>
           </div>
         </div>
       </div>

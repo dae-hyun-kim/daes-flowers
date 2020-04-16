@@ -413,6 +413,12 @@ body {
   font-size: 1.5em;
 }
 
+.dim {
+  z-index: 2;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -564,6 +570,7 @@ and (max-device-width: 500px) {
 .confirm-remove-modal {
   width: 350px;
   margin-left: -175px;
+  z-index: 1000;
 }
 }
 
