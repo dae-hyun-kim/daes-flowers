@@ -32,7 +32,7 @@ Try the application at <a href="https://daes-flowers.danny-dae-kim.com/">https:/
 # Development
 ### System Requirements
 - Node.js 10 or higher
-- NPM 6 or higher
+- npm 6 or higher
 - PostgreSQL 10 or higher
 - Express 4 or higher
 
